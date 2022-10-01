@@ -16,8 +16,23 @@ import 'package:provider/provider.dart';
 import '../widgets/home_page_recent_transaction/box/income_box.dart';
 import 'package:intl/intl.dart';
 
-class TransactionPage extends StatelessWidget {
+class TransactionPage extends StatefulWidget {
   const TransactionPage({Key? key}) : super(key: key);
+
+  @override
+  State<TransactionPage> createState() => _TransactionPageState();
+}
+
+class _TransactionPageState extends State<TransactionPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Provider.of<ModelProvider>(context, listen: false)
+          .initialTransaction();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

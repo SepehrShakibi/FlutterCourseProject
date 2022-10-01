@@ -94,6 +94,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -241,81 +242,92 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    Container(
-                      height: 110,
-                      width: double.infinity,
-                      child: ListView.builder(
-                        //   reverse: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount:
-                            Provider.of<ModelProvider>(context, listen: false)
+                    FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(uid)
+                          .collection('transactions')
+                          .orderBy('dateTime')
+                          .get(),
+                      builder: (context, snapshot) {
+                        return Container(
+                          height: 110,
+                          width: double.infinity,
+                          child: ListView.builder(
+                            //   reverse: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: Provider.of<ModelProvider>(context,
+                                    listen: false)
                                 .getTransactionList
                                 .length,
-                        itemBuilder: (context, index) {
-                          switch (
-                              Provider.of<ModelProvider>(context, listen: false)
+                            itemBuilder: (context, index) {
+                              switch (Provider.of<ModelProvider>(context,
+                                      listen: false)
                                   .getTransactionList[index]
                                   .type) {
-                            case 'income':
-                              return IncomeBox(
-                                icon: Provider.of<ModelProvider>(context,
-                                        listen: false)
-                                    .getRecentTransactionIcon(
-                                        Provider.of<ModelProvider>(context,
-                                                listen: false)
-                                            .getTransactionList[index]
-                                            .beginCurrency),
-                                count: Provider.of<ModelProvider>(context,
-                                        listen: false)
-                                    .getTransactionList[index]
-                                    .count
-                                    .toString(),
-                              );
+                                case 'income':
+                                  return IncomeBox(
+                                    icon: Provider.of<ModelProvider>(context,
+                                            listen: false)
+                                        .getRecentTransactionIcon(
+                                            Provider.of<ModelProvider>(context,
+                                                    listen: false)
+                                                .getTransactionList[index]
+                                                .beginCurrency),
+                                    count: Provider.of<ModelProvider>(context,
+                                            listen: false)
+                                        .getTransactionList[index]
+                                        .count
+                                        .toString(),
+                                  );
 
-                            case 'exchange':
-                              return exchange_box(
-                                beginIcon: Provider.of<ModelProvider>(context,
-                                        listen: false)
-                                    .getRecentTransactionIcon(
-                                        Provider.of<ModelProvider>(context,
-                                                listen: false)
-                                            .getTransactionList[index]
-                                            .beginCurrency),
-                                endIcon: Provider.of<ModelProvider>(context,
-                                        listen: false)
-                                    .getRecentTransactionIcon(
-                                        Provider.of<ModelProvider>(context,
-                                                listen: false)
-                                            .getTransactionList[index]
-                                            .endCurrency),
-                                count: Provider.of<ModelProvider>(context,
-                                        listen: false)
-                                    .getTransactionList[index]
-                                    .count
-                                    .toString(),
-                              );
+                                case 'exchange':
+                                  return exchange_box(
+                                    beginIcon: Provider.of<ModelProvider>(
+                                            context,
+                                            listen: false)
+                                        .getRecentTransactionIcon(
+                                            Provider.of<ModelProvider>(context,
+                                                    listen: false)
+                                                .getTransactionList[index]
+                                                .beginCurrency),
+                                    endIcon: Provider.of<ModelProvider>(context,
+                                            listen: false)
+                                        .getRecentTransactionIcon(
+                                            Provider.of<ModelProvider>(context,
+                                                    listen: false)
+                                                .getTransactionList[index]
+                                                .endCurrency),
+                                    count: Provider.of<ModelProvider>(context,
+                                            listen: false)
+                                        .getTransactionList[index]
+                                        .count
+                                        .toString(),
+                                  );
 
-                            case 'expense':
-                              return ExpenseBox(
-                                icon: Provider.of<ModelProvider>(context,
-                                        listen: false)
-                                    .getRecentTransactionIcon(
-                                        Provider.of<ModelProvider>(context,
-                                                listen: false)
-                                            .getTransactionList[index]
-                                            .beginCurrency),
-                                count: Provider.of<ModelProvider>(context,
-                                        listen: false)
-                                    .getTransactionList[index]
-                                    .count
-                                    .toString(),
-                              );
-                            default:
-                              return Text('NoThing');
-                          }
-                        },
-                      ),
-                    ),
+                                case 'expense':
+                                  return ExpenseBox(
+                                    icon: Provider.of<ModelProvider>(context,
+                                            listen: false)
+                                        .getRecentTransactionIcon(
+                                            Provider.of<ModelProvider>(context,
+                                                    listen: false)
+                                                .getTransactionList[index]
+                                                .beginCurrency),
+                                    count: Provider.of<ModelProvider>(context,
+                                            listen: false)
+                                        .getTransactionList[index]
+                                        .count
+                                        .toString(),
+                                  );
+                                default:
+                                  return Text('NoThing');
+                              }
+                            },
+                          ),
+                        );
+                      },
+                    )
                   ],
                 ))
           ],

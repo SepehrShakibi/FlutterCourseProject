@@ -233,7 +233,7 @@ class ModelProvider extends ChangeNotifier {
         .orderBy('dateTime')
         .get();
 
-    late List transactionList;
+    transactionList = [];
     print(transactions.docs.length);
     final allData = transactions.docs.map((doc) => doc.data()).toList();
     for (var transaction in allData) {
