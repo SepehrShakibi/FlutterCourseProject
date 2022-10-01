@@ -44,7 +44,7 @@ class exchange_box extends StatelessWidget {
               child: Text(
                 count,
                 style: TextStyle(
-                    fontSize: 23,
+                    fontSize: 18,
                     fontFamily: 'CharisSILB',
                     fontWeight: FontWeight.bold,
                     color: Color(0xFFECEBE9)),

@@ -34,7 +34,7 @@ class IncomeBox extends StatelessWidget {
                   Text(
                     "+$count",
                     style: TextStyle(
-                        fontSize: 23,
+                        fontSize: 18,
                         fontFamily: 'CharisSILB',
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 169, 246, 81)),
