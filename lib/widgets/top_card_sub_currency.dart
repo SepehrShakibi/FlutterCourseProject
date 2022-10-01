@@ -15,20 +15,12 @@ class TopCardSubCurrency extends StatelessWidget {
           color: Colors.white,
           size: 35,
         ),
-        // Text(
-        //   "BTC",
-        //   style: TextStyle(
-        //       fontFamily: 'CharisSILB',
-        //       fontWeight: FontWeight.bold,
-        //       fontSize: 25,
-        //       color: Color(0xFFF4F9FC)),
-        // ),
         Text(
           price,
           style: TextStyle(
               fontFamily: 'CharisSILB',
               fontWeight: FontWeight.bold,
-              fontSize: 25,
+              fontSize: 20,
               color: Color(0xFFF4F9FC)),
         ),
       ],

@@ -34,48 +34,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // //set firebase
-  // Future<bool> setFirestore() async {
-  //   String uid = await FirebaseAuth.instance.currentUser!.uid;
-  //   DocumentReference documentReference = FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(uid)
-  //       .collection('balance')
-  //       .doc('balance');
-
-  //   FirebaseFirestore.instance.runTransaction((transaction) async {
-  //     DocumentSnapshot documentSnapshot =
-  //         await transaction.get(documentReference);
-  //     if (!documentSnapshot.exists) {
-  //       documentReference.set({'USD': 0, 'BTC': 0, 'ETH': 0, 'USDT': 0});
-  //       print('now existed!');
-  //       return true;
-  //     }
-  //     print('was exi..');
-  //     print(documentSnapshot.get('BTC'));
-  //     double newValue = documentSnapshot.get('BTC') + 120.0;
-  //     print('newva');
-  //     print(newValue);
-  //     transaction.update(documentReference, {'BTC': newValue});
-
-  //     return true;
-  //   });
-  //   return true;
-  // }
-
-  // Future<void> testforeach() async {
-  //   print("start");
-  //   final messages = await FirebaseFirestore.instance
-  //       .collection('users')
-  //       .orderBy('time')
-  //       .get();
-  //   print('end');
-  //   for (var message in messages.docs) {
-  //     print(message.data());
-  //   }
-  //   print('end3');
-  // }
-
   @override
   void initState() {
     // TODO: implement initState

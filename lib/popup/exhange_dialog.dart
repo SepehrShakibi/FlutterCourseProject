@@ -3,8 +3,7 @@ import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/model/transaction.dart';
 import 'package:crypto_wallet/widgets/exchange/exchange_dropdown_field.dart';
-import 'package:crypto_wallet/widgets/income_container.dart';
-import 'package:crypto_wallet/widgets/income_expense_widget/income_expense_dropdown_field.dart';
+
 import 'package:crypto_wallet/widgets/apply_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
