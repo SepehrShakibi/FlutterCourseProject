@@ -1,4 +1,5 @@
 import 'package:crypto_wallet/constant.dart';
+import 'package:crypto_wallet/constants/route.dart';
 import 'package:crypto_wallet/widgets/login_page_widget/input_text_field.dart';
 import 'package:crypto_wallet/widgets/login_page_widget/password_text_field.dart';
 import 'package:crypto_wallet/widgets/apply_button.dart';
@@ -109,8 +110,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: GestureDetector(
-                          onTap: () => Navigator.pushNamed(
-                              context, 'forget_password_page'),
+                          onTap: () =>
+                              Navigator.pushNamed(context, forgetPasswordPage),
                           child: Text(
                             "Forgot Password?",
                             style: TextStyle(

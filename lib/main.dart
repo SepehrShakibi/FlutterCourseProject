@@ -1,3 +1,4 @@
+import 'package:crypto_wallet/constants/route.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/screens/forget_page.dart';
 import 'package:crypto_wallet/screens/home_page.dart';
@@ -16,36 +17,41 @@ void main() async {
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Crypto Currency Wallet',
-      initialRoute: 'user_page',
+      initialRoute: userPage,
       routes: {
-        'user_page': ((context) => const UserPage()),
-        'forget_password_page': ((context) => const ForgetPasswordPage()),
-        'home_page': ((context) => const HomePage()),
-        'transaction_list_page': (context) => const TransactionPage()
+        userPage: ((context) => const UserPage()),
+        forgetPasswordPage: ((context) => const ForgetPasswordPage()),
+        homePage: ((context) => const HomePage()),
+        transactionListPage: (context) => const TransactionPage()
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
-          case 'user_page':
+          case userPage:
             return PageTransition(
-                child: UserPage(),
+                child: const UserPage(),
                 type: PageTransitionType.fade,
-                duration: Duration(milliseconds: 350));
+                duration: const Duration(milliseconds: 350));
 
-          case 'forget_password_page':
+          case forgetPasswordPage:
             return PageTransition(
-                child: ForgetPasswordPage(),
+                child: const ForgetPasswordPage(),
                 type: PageTransitionType.fade,
-                duration: Duration(milliseconds: 350));
-          case 'home_page':
+                duration: const Duration(milliseconds: 350));
+          case homePage:
             return PageTransition(
-                child: HomePage(),
+                child: const HomePage(),
                 type: PageTransitionType.fade,
-                duration: Duration(milliseconds: 350));
-          case 'transaction_list_page':
+                duration: const Duration(milliseconds: 350));
+          case transactionListPage:
             return PageTransition(
-                child: TransactionPage(),
+                child: const TransactionPage(),
                 type: PageTransitionType.fade,
-                duration: Duration(milliseconds: 350));
+                duration: const Duration(milliseconds: 350));
+          default:
+            return PageTransition(
+                child: const UserPage(),
+                type: PageTransitionType.fade,
+                duration: const Duration(milliseconds: 350));
         }
       },
 

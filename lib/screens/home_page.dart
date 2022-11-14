@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_font_icons/crypto_font_icon_data.dart';
 import 'package:crypto_wallet/constant.dart';
+import 'package:crypto_wallet/constants/route.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/widgets/icons/btc_recent_transaction_icon.dart';
 import 'package:crypto_wallet/widgets/icons/eth_recent_transaction_icon.dart';
@@ -176,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   TextButton(
                                     onPressed: () => Navigator.pushNamed(
-                                        context, 'transaction_list_page'),
+                                        context, transactionListPage),
                                     child: Text(
                                       "See all",
                                       style: TextStyle(

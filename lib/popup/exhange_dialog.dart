@@ -20,7 +20,6 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
       Provider.of<ModelProvider>(context, listen: false).GetETHPrice;
 
   ///
-  ///
   final TextEditingController _firstCountController = TextEditingController();
   ////
   String finalValue = "";
@@ -36,30 +35,15 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
         crossAxisAlignment: CrossAxisAlignment.center,
         textBaseline: TextBaseline.alphabetic,
         children: [
-          // SizedBox(
-          //   width: 7,
-          // ),
-          //   USDRecentTransactionIcon(),
-          // Text(
-          //   "\$",
-          //   style: TextStyle(
-          //       fontSize: 25,
-          //       color: KiconColor,
-          //       fontFamily: 'CharisSILB',
-          //       backgroundColor: Color.fromARGB(255, 0, 0, 0)
-
-          //       ),
-          // ),
-          Icon(
-            FontAwesomeIcons.usd,
+          const Icon(
+            FontAwesomeIcons.dollarSign,
             size: 33.5,
             color: Colors.white,
           ),
-
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text(
+          const Text(
             "USD",
             style: TextStyle(
                 fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
@@ -72,15 +56,15 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Icon(
+          const Icon(
             CryptoFontIcons.BTC,
             size: 33.5,
             color: Color(0xFFea973d),
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text(
+          const Text(
             "BTC",
             style: TextStyle(
                 fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
@@ -90,6 +74,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
       value: 'BTC',
     ),
     DropdownMenuItem(
+      // ignore: sort_child_properties_last
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -98,10 +83,10 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
             size: 33.5,
             color: Colors.blueAccent.shade400,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text(
+          const Text(
             "ETH",
             style: TextStyle(
                 fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
@@ -119,10 +104,10 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
             size: 33.5,
             color: Colors.greenAccent.shade400,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text(
+          const Text(
             "USDT",
             style: TextStyle(
                 fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
@@ -140,8 +125,8 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
       builder: (context, setState) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         contentPadding: EdgeInsets.zero,
-        backgroundColor: Color.fromARGB(255, 28, 28, 28),
-        content: Container(
+        backgroundColor: const Color.fromARGB(255, 28, 28, 28),
+        content: SizedBox(
           //    padding: EdgeInsets.symmetric(vertical: 15),
           height: size.height * 0.63,
           width: size.width * 0.95,
@@ -154,14 +139,14 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
               child: Column(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Exchange",
                       style: TextStyle(
                           fontFamily: 'CharisSILB',
                           color: Colors.white,
                           fontSize: 25),
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.white,
                       thickness: 0.7,
                     ),
@@ -169,9 +154,9 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                       height: size.height * 0.03,
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 56, 56, 56),
+                          color: const Color.fromARGB(255, 56, 56, 56),
                           borderRadius: BorderRadius.circular(15),
                           border:
                               Border.all(color: Colors.redAccent, width: 2)),
@@ -180,24 +165,10 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                           Column(
                             children: [
                               DropdownButtonFormField(
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none
-                                      // enabledBorder: OutlineInputBorder(
-                                      //     borderSide: BorderSide(
-                                      //         // color: Colors.white.withOpacity(1),
-                                      //         color: Colors.transparent),
-                                      //     borderRadius: BorderRadius.circular(15)),
-                                      // border: OutlineInputBorder(
-                                      //     borderSide: BorderSide(
-                                      //         //  color: Colors.white.withOpacity(0.5),
-                                      //         color: Colors.transparent),
-                                      //     borderRadius: BorderRadius.circular(15)),
-                                      // filled: true,
-                                      // fillColor: Color.fromARGB(255, 56, 56, 56)
-                                      //  fillColor: Color.fromARGB(255, 19, 91, 178)
-                                      ),
+                                  decoration: const InputDecoration(
+                                      border: InputBorder.none),
                                   dropdownColor:
-                                      Color.fromARGB(255, 58, 58, 58),
+                                      const Color.fromARGB(255, 58, 58, 58),
                                   borderRadius: BorderRadius.circular(15),
                                   value: _selectedMenuValueFirst,
                                   items: _dropdownMenuItem,
@@ -207,7 +178,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                       firstPrice = Provider.of<ModelProvider>(
                                               context,
                                               listen: false)
-                                          .getPrice(value!);
+                                          .getPrice(value);
                                       if (_firstCountController
                                           .text.isNotEmpty) {
                                         finalValue = (double.parse(
@@ -219,7 +190,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                       }
                                     });
                                   }),
-                              Divider(
+                              const Divider(
                                 color: Colors.white,
                                 thickness: 0.7,
                               ),
@@ -234,13 +205,13 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                           .toString();
                                     });
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: InputBorder.none,
                                       filled: true,
                                       fillColor: Color.fromARGB(255, 56, 56, 56)
                                       //  fillColor: Color.fromARGB(255, 19, 91, 178)
                                       ),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'OpenSansR',
                                       fontSize: 20)),
@@ -249,21 +220,21 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Icon(
+                    const Icon(
                       FontAwesomeIcons.arrowDownLong,
                       color: Colors.white,
                       size: 35,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 56, 56, 56),
+                          color: const Color.fromARGB(255, 56, 56, 56),
                           borderRadius: BorderRadius.circular(15),
                           border:
                               Border.all(color: Colors.greenAccent, width: 2)),
@@ -273,24 +244,10 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               DropdownButtonFormField(
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none
-                                      // enabledBorder: OutlineInputBorder(
-                                      //     borderSide: BorderSide(
-                                      //         // color: Colors.white.withOpacity(1),
-                                      //         color: Colors.transparent),
-                                      //     borderRadius: BorderRadius.circular(15)),
-                                      // border: OutlineInputBorder(
-                                      //     borderSide: BorderSide(
-                                      //         //  color: Colors.white.withOpacity(0.5),
-                                      //         color: Colors.transparent),
-                                      //     borderRadius: BorderRadius.circular(15)),
-                                      // filled: true,
-                                      // fillColor: Color.fromARGB(255, 56, 56, 56)
-                                      //  fillColor: Color.fromARGB(255, 19, 91, 178)
-                                      ),
+                                  decoration: const InputDecoration(
+                                      border: InputBorder.none),
                                   dropdownColor:
-                                      Color.fromARGB(255, 58, 58, 58),
+                                      const Color.fromARGB(255, 58, 58, 58),
                                   borderRadius: BorderRadius.circular(15),
                                   value: _selectedMenuValueSecond,
                                   items: _dropdownMenuItem,
@@ -300,7 +257,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                       secondPrice = Provider.of<ModelProvider>(
                                               context,
                                               listen: false)
-                                          .getPrice(value!);
+                                          .getPrice(value);
                                       if (_firstCountController.text
                                           .trim()
                                           .isNotEmpty) {
@@ -313,7 +270,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                       }
                                     });
                                   }),
-                              Divider(
+                              const Divider(
                                 color: Colors.white,
                                 thickness: 0.7,
                               ),
@@ -322,7 +279,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                     vertical: 12, horizontal: 10),
                                 child: Text(
                                   finalValue,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'OpenSansR',
                                       fontSize: 20),
@@ -345,24 +302,6 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                             size: size,
                             onTap: () async {
                               dateTime = DateTime.now();
-                              print('from apply bu');
-                              print(double.parse(finalValue));
-                              // print(double.parse(
-                              //     _firstCountController.text.trim()));
-                              // print(double.parse(finalValue));
-
-                              // print(Provider.of<ModelProvider>(context,
-                              //         listen: false)
-                              //     .GetBTCPrice);
-                              // print(Provider.of<ModelProvider>(context,
-                              //         listen: false)
-                              //     .GetETHPrice);
-                              // print(Provider.of<ModelProvider>(context,
-                              //         listen: false)
-                              //     .GetUSDTPrice);
-                              // print('price');
-                              // print(firstPrice);
-                              // print(secondPrice);
 
                               // DECREASE FIRST Currency
                               switch (_selectedMenuValueFirst) {
@@ -465,7 +404,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                       dateTime: dateTime));
 
                               String uid =
-                                  await FirebaseAuth.instance.currentUser!.uid;
+                                  FirebaseAuth.instance.currentUser!.uid;
                               await FirebaseFirestore.instance
                                   .collection('users')
                                   .doc(uid)
@@ -478,10 +417,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                     _firstCountController.text.trim()),
                                 'dateTime': Timestamp.fromDate(dateTime)
                               });
-                              print(Provider.of<ModelProvider>(context,
-                                      listen: false)
-                                  .getTransactionList
-                                  .length);
+
                               Navigator.pop(context);
                             },
                             color: KButtonBackgroundColor1,
@@ -506,12 +442,14 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
 }
 
 class CurrencyTextWidget extends StatelessWidget {
+  const CurrencyTextWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 56, 56, 56),
+          color: const Color.fromARGB(255, 56, 56, 56),
           borderRadius: BorderRadius.circular(15),
           border: Border.all(color: Colors.greenAccent, width: 2)),
       child: Column(
@@ -519,14 +457,13 @@ class CurrencyTextWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ExchangeDropdownButton(),
-              Divider(
+              const ExchangeDropdownButton(),
+              const Divider(
                 color: Colors.white,
                 thickness: 0.7,
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                 child: Text(
                   "Final Price",
                   style: TextStyle(

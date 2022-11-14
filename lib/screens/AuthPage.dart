@@ -1,7 +1,6 @@
 import 'package:crypto_wallet/screens/login_page.dart';
+import 'package:flutter/material.dart';
 import 'package:crypto_wallet/screens/register_page.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -11,21 +10,21 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  bool ShowLoginPage = true;
-  void ToggleScreen() {
+  bool showLoginPage = true;
+  void toggleScreen() {
     setState(() {
-      ShowLoginPage = !ShowLoginPage;
+      showLoginPage = !showLoginPage;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (ShowLoginPage) {
+    if (showLoginPage) {
       return LoginPage(
-        onTap: ToggleScreen,
+        onTap: toggleScreen,
       );
     } else {
-      return RegisterPage(onTap: ToggleScreen);
+      return RegisterPage(onTap: toggleScreen);
     }
   }
 }

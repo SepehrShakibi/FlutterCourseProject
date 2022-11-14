@@ -1,10 +1,8 @@
-import 'package:crypto_wallet/constant.dart';
 import 'package:crypto_wallet/widgets/login_page_widget/input_text_field.dart';
-import 'package:crypto_wallet/widgets/login_page_widget/password_text_field.dart';
+
 import 'package:crypto_wallet/widgets/apply_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   const ForgetPasswordPage({Key? key}) : super(key: key);
@@ -22,7 +20,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
             .sendPasswordResetEmail(email: _emailController.text.trim());
         Navigator.pop(context);
       } else {
-        var snackBar = SnackBar(
+        var snackBar = const SnackBar(
             backgroundColor: Color.fromARGB(255, 28, 28, 28),
             content: Text(
               'Please Enter Email',
@@ -31,7 +29,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     } catch (e) {
-      var snackBar = SnackBar(
+      var snackBar = const SnackBar(
           backgroundColor: Color.fromARGB(255, 28, 28, 28),
           content: Text(
             'Sorry...There is a problem!Please try again..',
@@ -53,7 +51,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
             alignment: Alignment.center,
             height: size.height,
             width: size.width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/forget_background.jpg'),
                     fit: BoxFit.cover,
@@ -65,7 +63,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
+                    const Text(
                       "Enter your Email",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -74,11 +72,11 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                           color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.white,
                       thickness: 0.8,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     inputTextField(
@@ -87,7 +85,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       hintText: 'CryptoWallet@email.com',
                       prefixIcon: Icons.email_outlined,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     ApplyButton(

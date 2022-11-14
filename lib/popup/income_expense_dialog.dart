@@ -1,35 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:crypto_wallet/model/transaction.dart';
-import 'package:crypto_wallet/widgets/income_container.dart';
-import 'package:crypto_wallet/widgets/income_expense_widget/income_expense_dropdown_field.dart';
 import 'package:crypto_wallet/widgets/apply_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:crypto_wallet/constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../model/provider_model.dart';
-import '../widgets/income_expense_widget/income_expense_dropdown_menu.dart';
-import '../widgets/income_expense_widget/income_expense_toggle_button.dart';
 
 Future<void> IncomExpenseDialog(BuildContext context, Size size) {
   double newValue = 0.0;
   DateTime dateTime;
 
   final List<Widget> _options = [
-    Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+    const Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
       child: Text(
         'Income',
         style: TextStyle(
             fontSize: 18.5, fontFamily: 'RobotoR', fontWeight: FontWeight.w400),
       ),
     ),
-    Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+    const Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
       child: Text(
         'Expense',
         style: TextStyle(
@@ -46,65 +41,51 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
   String _selectedMenuValue = 'USD';
   final List<DropdownMenuItem<String>> _dropdownMenuItem = [
     DropdownMenuItem(
+      value: "USD",
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         textBaseline: TextBaseline.alphabetic,
         children: [
-          // SizedBox(
-          //   width: 7,
-          // ),
-          //   USDRecentTransactionIcon(),
-          // Text(
-          //   "\$",
-          //   style: TextStyle(
-          //       fontSize: 25,
-          //       color: KiconColor,
-          //       fontFamily: 'CharisSILB',
-          //       backgroundColor: Color.fromARGB(255, 0, 0, 0)
-
-          //       ),
-          // ),
-          Icon(
+          const Icon(
             FontAwesomeIcons.usd,
             size: 33.5,
             color: Colors.white,
           ),
-
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text(
+          const Text(
             "USD",
             style: TextStyle(
                 fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
           )
         ],
       ),
-      value: "USD",
     ),
     DropdownMenuItem(
+      value: 'BTC',
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Icon(
+          const Icon(
             CryptoFontIcons.BTC,
             size: 33.5,
             color: Color(0xFFea973d),
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text(
+          const Text(
             "BTC",
             style: TextStyle(
                 fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
           )
         ],
       ),
-      value: 'BTC',
     ),
     DropdownMenuItem(
+      value: 'ETH',
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -113,19 +94,19 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
             size: 33.5,
             color: Colors.blueAccent.shade400,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text(
+          const Text(
             "ETH",
             style: TextStyle(
                 fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
           )
         ],
       ),
-      value: 'ETH',
     ),
     DropdownMenuItem(
+      value: 'USDT',
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -134,17 +115,16 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
             size: 33.5,
             color: Colors.greenAccent.shade400,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text(
+          const Text(
             "USDT",
             style: TextStyle(
                 fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
           )
         ],
       ),
-      value: 'USDT',
     ),
   ];
 
@@ -172,14 +152,14 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
               child: Column(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Income Expense",
                       style: TextStyle(
                           fontFamily: 'CharisSILB',
                           color: Colors.white,
                           fontSize: 25),
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.white,
                       thickness: 0.7,
                     ),
@@ -189,7 +169,7 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Color.fromARGB(255, 67, 67, 67),
+                        color: const Color.fromARGB(255, 67, 67, 67),
                       ),
                       child: ToggleButtons(
                           direction: Axis.horizontal,
@@ -212,9 +192,9 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                           color: Colors.white,
                           borderColor: Colors.grey.shade100,
                           borderWidth: 1,
+                          isSelected: _isSelected,
                           //   disabledColor: Color.fromARGB(255, 221, 0, 0),
-                          children: _options,
-                          isSelected: _isSelected),
+                          children: _options),
                     ),
                     SizedBox(
                       height: size.height * 0.02,
@@ -224,7 +204,7 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                           const EdgeInsets.only(left: 5, top: 10, bottom: 5),
                       child: Container(
                         alignment: Alignment.centerLeft,
-                        child: Text(
+                        child: const Text(
                           "Currency:",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -241,42 +221,31 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                     DropdownButtonFormField(
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    // color: Colors.white.withOpacity(1),
-                                    color: Colors.transparent),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
                                 borderRadius: BorderRadius.circular(15)),
                             border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    //  color: Colors.white.withOpacity(0.5),
-                                    color: Colors.transparent),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
                                 borderRadius: BorderRadius.circular(15)),
                             filled: true,
-                            fillColor: Color.fromARGB(255, 56, 56, 56)
-                            //  fillColor: Color.fromARGB(255, 19, 91, 178)
-                            ),
-                        dropdownColor: Color.fromARGB(255, 58, 58, 58),
+                            fillColor: const Color.fromARGB(255, 56, 56, 56)),
+                        dropdownColor: const Color.fromARGB(255, 58, 58, 58),
                         borderRadius: BorderRadius.circular(15),
                         value: _selectedMenuValue,
                         items: _dropdownMenuItem,
                         onChanged: (String? value) {
                           setInnerState(() {
                             _selectedMenuValue = value!;
-                            print(value);
-                            // _selectedMenuValue = value;
-                            // Provider.of<ModelProvider>(context, listen: false)
-                            //     .setBeginCurrency(value);
-                            //  print(Provider.of<ModelProvider>(context).getBeginCurrency);
                           });
                         }),
-                    // SizedBox(
-                    //   height: size.height * 0.002,
-                    // ),
+
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 5, top: 8, bottom: 5),
                       child: Container(
                         alignment: Alignment.centerLeft,
-                        child: Text(
+                        child: const Text(
                           "Count:",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -289,32 +258,24 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                     ),
                     TextFormField(
                         controller: _countController,
-                        keyboardType: TextInputType.numberWithOptions(),
+                        keyboardType: const TextInputType.numberWithOptions(),
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    // color: Colors.white.withOpacity(1),
-                                    color: Colors.transparent),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
                                 borderRadius: BorderRadius.circular(15)),
                             border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    //  color: Colors.white.withOpacity(0.5),
-                                    color: Colors.transparent),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
                                 borderRadius: BorderRadius.circular(15)),
                             filled: true,
-                            fillColor: Color.fromARGB(255, 56, 56, 56)
-                            //  fillColor: Color.fromARGB(255, 19, 91, 178)
-                            ,
-                            // prefixIcon: Icon(
-                            //   Icons.attach_money_outlined,
-                            //   color: KRegistericonColor,
-                            // ),
+                            fillColor: const Color.fromARGB(255, 56, 56, 56),
                             hintText: "Enter Count",
                             hintStyle: TextStyle(
                                 color: Colors.grey[400],
                                 fontFamily: 'OpenSansR',
                                 fontSize: 15)),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'OpenSansR',
                             fontSize: 20)),
@@ -329,10 +290,6 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                             size: size,
                             onTap: () async {
                               dateTime = DateTime.now();
-                              // print('in add bu');
-                              // print(_isIncome);
-                              // print(_selectedMenuValue);
-                              // print(double.parse(_countController.text.trim()));
 
                               switch (_selectedMenuValue) {
                                 case 'USD':
@@ -413,13 +370,9 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                                       count: double.parse(
                                           _countController.text.trim()),
                                       dateTime: dateTime));
-                              print(Provider.of<ModelProvider>(context,
-                                      listen: false)
-                                  .getTransactionList
-                                  .length);
 
                               String uid =
-                                  await FirebaseAuth.instance.currentUser!.uid;
+                                  FirebaseAuth.instance.currentUser!.uid;
                               await FirebaseFirestore.instance
                                   .collection('users')
                                   .doc(uid)
@@ -432,21 +385,6 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                                     double.parse(_countController.text.trim()),
                                 'dateTime': Timestamp.fromDate(dateTime)
                               });
-
-                              // newValue =
-                              //     double.parse(_countController.text.trim()) +
-                              //         Provider.of<ModelProvider>(context,
-                              //                 listen: false)
-                              //             .GetETHBalance;
-                              // print('new va');
-                              // print(newValue);
-                              // print('set bala');
-                              // Provider.of<ModelProvider>(context, listen: false)
-                              //     .setETHBalance(newValue);
-                              // print('newba');
-                              // print(Provider.of<ModelProvider>(context,
-                              //         listen: false)
-                              //     .GetETHBalance);
 
                               Navigator.pop(context);
                             },

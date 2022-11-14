@@ -225,7 +225,7 @@ class ModelProvider extends ChangeNotifier {
 
   //initial transaction from firebase
   Future<void> initialTransaction() async {
-    String uid = await FirebaseAuth.instance.currentUser!.uid;
+    String uid = FirebaseAuth.instance.currentUser!.uid;
     final transactions = await FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
@@ -234,7 +234,7 @@ class ModelProvider extends ChangeNotifier {
         .get();
 
     transactionList = [];
-    print(transactions.docs.length);
+
     final allData = transactions.docs.map((doc) => doc.data()).toList();
     for (var transaction in allData) {
       addLocalTransacion(TransactionModel(
@@ -295,15 +295,15 @@ class ModelProvider extends ChangeNotifier {
   Widget getRecentTransactionIcon(String currency) {
     switch (currency) {
       case 'USD':
-        return USDRecentTransactionIcon();
+        return const USDRecentTransactionIcon();
       case 'BTC':
-        return BTCRecentTransactionIcon();
+        return const BTCRecentTransactionIcon();
       case 'ETH':
-        return ETHRecentTransactionIcon();
+        return const ETHRecentTransactionIcon();
       case 'USDT':
-        return USDTRecentTransactionIcon();
+        return const USDTRecentTransactionIcon();
       default:
-        return USDRecentTransactionIcon();
+        return const USDRecentTransactionIcon();
     }
   }
 }

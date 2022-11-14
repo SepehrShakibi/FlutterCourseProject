@@ -1,5 +1,6 @@
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:crypto_wallet/constant.dart';
+import 'package:crypto_wallet/constants/route.dart';
 import 'package:crypto_wallet/popup/exhange_dialog.dart';
 import 'package:crypto_wallet/widgets/icons/btc_recent_transaction_icon.dart';
 import 'package:crypto_wallet/widgets/vertical_line.dart';
@@ -66,7 +67,7 @@ class HomePageTopButtons extends StatelessWidget {
               flex: 100,
               child: HomePageButton(
                 onPressed: () =>
-                    Navigator.pushNamed(context, 'transaction_list_page'),
+                    Navigator.pushNamed(context, transactionListPage),
                 icon: Icons.currency_exchange_rounded,
                 title: "Transaction",
               ),
