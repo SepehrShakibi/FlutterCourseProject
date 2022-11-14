@@ -51,7 +51,6 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        //    elevation: 5,
         title: const Text(
           "Home Page",
           style: TextStyle(
@@ -67,7 +66,6 @@ class _HomePageState extends State<HomePage> {
               },
               icon: const Icon(
                 Icons.logout,
-                //  color: KiconColor,
                 size: 35,
               ))
         ],
