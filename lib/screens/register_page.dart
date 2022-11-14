@@ -1,23 +1,22 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_wallet/constant.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
-import 'package:crypto_wallet/widgets/login_page_widget/input_text_field.dart';
-import 'package:crypto_wallet/widgets/login_page_widget/password_text_field.dart';
-import 'package:crypto_wallet/widgets/register_page_widget/input/register_name_text_field.dart';
+
 import 'package:crypto_wallet/widgets/register_page_widget/password/registerpage_password_listtile.dart';
 import 'package:crypto_wallet/widgets/apply_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:lottie/lottie.dart';
+
 import 'package:provider/provider.dart';
 
 import '../widgets/register_page_widget/input/registerpage_input_listtile.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback onTap;
-  RegisterPage({required this.onTap});
+  const RegisterPage({Key? key, required this.onTap}) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -31,8 +30,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _repeatPasswordController = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
-
     _firstnameController.dispose();
     _lastnameController.dispose();
     _emailController.dispose();
@@ -47,8 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
         _emailController.text.trim().isEmpty ||
         _passwordController.text.trim().isEmpty ||
         _repeatPasswordController.text.trim().isEmpty) {
-      print("emtyy!");
-      var snackBar = SnackBar(
+      var snackBar = const SnackBar(
           backgroundColor: Color.fromARGB(255, 28, 28, 28),
           content: Text(
             'Please Complete fields',
@@ -58,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
       return false;
     } else if (_passwordController.text.trim() !=
         _repeatPasswordController.text.trim()) {
-      var snackBar = SnackBar(
+      var snackBar = const SnackBar(
           backgroundColor: Color.fromARGB(255, 28, 28, 28),
           content: Text('Passwords are not the same',
               style: TextStyle(fontFamily: 'RobotoR')));
@@ -67,13 +63,8 @@ class _RegisterPageState extends State<RegisterPage> {
       return false;
     } else if ((_passwordController.text.trim() ==
             _repeatPasswordController.text.trim()) &
-        !_passwordController.text.trim().isEmpty &
-        !_repeatPasswordController.text.trim().isEmpty) {
-      print('email');
-      print(_emailController.text.trim());
-      print('pass');
-      print(_passwordController.text.trim());
-      print("tr");
+        _passwordController.text.trim().isNotEmpty &
+        _repeatPasswordController.text.trim().isNotEmpty) {
       return true;
     } else {
       return false;
@@ -81,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> addUser(String firstname, String lastname, String email) async {
-    String uid = await FirebaseAuth.instance.currentUser!.uid;
+    String uid = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance.collection("users").doc(uid).set({
       'firstname': firstname,
       'lastname': lastname,
@@ -91,6 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future signUp() async {
+    final provider = Provider.of<ModelProvider>(context, listen: false);
     Provider.of<ModelProvider>(context, listen: false).resetLocalTransacion;
     if (PasswordConfirm()) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -98,15 +90,9 @@ class _RegisterPageState extends State<RegisterPage> {
           password: _passwordController.text.trim());
       await addUser(_firstnameController.text.trim(),
           _lastnameController.text.trim(), _emailController.text.trim());
-
-      print('set price onnnnn');
-      await Provider.of<ModelProvider>(context, listen: false).setPriceOnline();
-      print('set chartttttttttttttttt');
-      await Provider.of<ModelProvider>(context, listen: false).setCharts();
-      print('settt transsss');
-      await Provider.of<ModelProvider>(context, listen: false)
-          .initialTransaction();
-      print('fninieshdedd');
+      await provider.setPriceOnline();
+      await provider.setCharts();
+      await provider.initialTransaction();
     }
   }
 
@@ -122,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Container(
             height: size.height,
             width: size.width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/register_background.jpg'),
                     fit: BoxFit.cover,
@@ -135,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(height: size.height / 35),
-                    Text(
+                    const Text(
                       "Register",
                       style: TextStyle(
                           fontFamily: 'BebasNeueR',
@@ -143,10 +129,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           fontSize: 45),
                       textAlign: TextAlign.center,
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Column(
@@ -183,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             title: 'Repeat Password',
                             hinttext: 'Repeat Password',
                             icon: Icons.password_outlined),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         ApplyButton(
@@ -193,13 +179,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           color: Colors.white.withOpacity(0.4),
                           text: 'Register',
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               "Member? ",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -209,7 +195,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             GestureDetector(
                               onTap: widget.onTap,
-                              child: Text("Login Now!",
+                              child: const Text("Login Now!",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: KsuboptionColor,
@@ -218,7 +204,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                       ],

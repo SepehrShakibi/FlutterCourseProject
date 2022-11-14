@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:crypto_wallet/constant.dart';
 
 import 'package:flutter/material.dart';
@@ -5,7 +7,11 @@ import 'package:flutter/material.dart';
 class DropDownButtonField extends StatefulWidget {
   final StateSetter stset;
   String selectedValue;
-  DropDownButtonField({required this.stset, required this.selectedValue});
+  DropDownButtonField({
+    Key? key,
+    required this.stset,
+    required this.selectedValue,
+  }) : super(key: key);
 
   @override
   State<DropDownButtonField> createState() => _DropDownButtonFieldState();
@@ -19,21 +25,21 @@ class _DropDownButtonFieldState extends State<DropDownButtonField> {
     return DropdownButtonFormField(
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent),
+                borderSide: const BorderSide(color: Colors.transparent),
                 borderRadius: BorderRadius.circular(15)),
             border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent),
+                borderSide: const BorderSide(color: Colors.transparent),
                 borderRadius: BorderRadius.circular(15)),
             filled: true,
-            fillColor: Color.fromARGB(255, 56, 56, 56)),
-        dropdownColor: Color.fromARGB(255, 58, 58, 58),
+            fillColor: const Color.fromARGB(255, 56, 56, 56)),
+        dropdownColor: const Color.fromARGB(255, 58, 58, 58),
         borderRadius: BorderRadius.circular(15),
         value: widget.selectedValue,
         items: dropdownMenuItemConst,
         onChanged: (String? value) {
           widget.stset(() {
             widget.selectedValue = value!;
-            print(value);
+
             _selectedMenuValue = value;
           });
         });

@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:crypto_wallet/model/transaction.dart';
@@ -13,7 +15,7 @@ import '../model/provider_model.dart';
 Future<void> IncomExpenseDialog(BuildContext context, Size size) {
   double newValue = 0.0;
   DateTime dateTime;
-
+  final _navigatorPop = Navigator.pop(context);
   final List<Widget> _options = [
     const Padding(
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
@@ -46,9 +48,10 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         textBaseline: TextBaseline.alphabetic,
+        // ignore: prefer_const_literals_to_create_immutables
         children: [
           const Icon(
-            FontAwesomeIcons.usd,
+            FontAwesomeIcons.dollarSign,
             size: 33.5,
             color: Colors.white,
           ),
@@ -67,16 +70,16 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
       value: 'BTC',
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const Icon(
+        children: const [
+          Icon(
             CryptoFontIcons.BTC,
             size: 33.5,
             color: Color(0xFFea973d),
           ),
-          const SizedBox(
+          SizedBox(
             width: 5,
           ),
-          const Text(
+          Text(
             "BTC",
             style: TextStyle(
                 fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
@@ -138,11 +141,8 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
       builder: (context, setInnerState) => AlertDialog(
         contentPadding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        //Color.fromARGB(255, 28, 28, 28),
-        //Color.fromARGB(255, 34, 34, 34),
-        backgroundColor: Color.fromARGB(255, 28, 28, 28),
-        //  title: Text('Income/Expense'),
-        content: Container(
+        backgroundColor: const Color.fromARGB(255, 28, 28, 28),
+        content: SizedBox(
           height: size.height * 0.58,
           width: size.width * 0.95,
           child: SingleChildScrollView(
@@ -386,7 +386,7 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                                 'dateTime': Timestamp.fromDate(dateTime)
                               });
 
-                              Navigator.pop(context);
+                              _navigatorPop;
                             },
                             color: KButtonBackgroundColor1,
                             text: 'Apply'),

@@ -7,11 +7,13 @@ class RegisterNameTextField extends StatelessWidget {
   final IconData prefixIcon;
   final String hintText;
   final TextEditingController controller;
-  RegisterNameTextField(
-      {required this.hintText,
+  const RegisterNameTextField(
+      {Key? key,
+      required this.hintText,
       required this.prefixIcon,
       required this.textInputType,
-      required this.controller});
+      required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,10 @@ class RegisterNameTextField extends StatelessWidget {
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: KdisableBorderColor)),
+                borderSide: const BorderSide(color: KdisableBorderColor)),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: KborderColor, width: 2)),
+                borderSide: const BorderSide(color: KborderColor, width: 2)),
             prefixIcon: Icon(
               prefixIcon,
               color: KRegistericonColor,
@@ -32,6 +34,6 @@ class RegisterNameTextField extends StatelessWidget {
             hintText: hintText,
             hintStyle:
                 TextStyle(color: Colors.grey[400], fontFamily: 'OpenSansR')),
-        style: TextStyle(color: Colors.white, fontFamily: 'OpenSansR'));
+        style: const TextStyle(color: Colors.white, fontFamily: 'OpenSansR'));
   }
 }

@@ -9,15 +9,17 @@ class IncomeContainer extends StatelessWidget {
   final String date;
 
   const IncomeContainer(
-      {required this.color,
+      {Key? key,
+      required this.color,
       required this.count,
       required this.time,
       required this.date,
-      required this.icon});
+      required this.icon})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 7),
+        padding: const EdgeInsets.symmetric(horizontal: 7),
         height: 72,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -35,7 +37,7 @@ class IncomeContainer extends StatelessWidget {
               flex: 1,
               child: Text(
                 '+$count',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 27,
                     fontFamily: 'CharisSILB',
                     fontWeight: FontWeight.bold,

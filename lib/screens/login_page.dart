@@ -10,7 +10,7 @@ import 'package:lottie/lottie.dart';
 class LoginPage extends StatefulWidget {
   final VoidCallback onTap;
 
-  LoginPage({required this.onTap});
+  const LoginPage({Key? key, required this.onTap}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  // ignore: non_constant_identifier_names
   Future<void> Login() async {
     try {
       if (_emailController.text.trim().isNotEmpty &
@@ -28,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             email: _emailController.text.trim(),
             password: _passwordController.text.trim());
       } else {
-        var snackBar = SnackBar(
+        var snackBar = const SnackBar(
             backgroundColor: Color.fromARGB(255, 28, 28, 28),
             content: Text(
               'Please Complete Data',
@@ -37,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     } catch (e) {
-      var snackBar = SnackBar(
+      var snackBar = const SnackBar(
           backgroundColor: Color.fromARGB(255, 28, 28, 28),
           content: Text(
             'Sorry...There is a problem!Please try again..',
@@ -55,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
         resizeToAvoidBottomInset: true,
         body: SafeArea(
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/register_background.jpg'),
                     fit: BoxFit.cover,
@@ -67,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Container(
+                    SizedBox(
                       height: size.height / 2.1,
                       width: size.height / 30,
                       child: Lottie.asset("assets/animations/xW5sHdHxwE.json"),
@@ -75,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: size.height / 200,
                     ),
-                    Text(
+                    const Text(
                       "Welcome to \nCrypto Wallet App",
                       style: TextStyle(
                           fontFamily: 'BebasNeueR',
@@ -83,16 +84,16 @@ class _LoginPageState extends State<LoginPage> {
                           fontSize: 45),
                       textAlign: TextAlign.start,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    inputTextField(
+                    InputTextField(
                       controller: _emailController,
                       prefixIcon: Icons.email_outlined,
                       hintText: "CryptoWallet@email.Com",
                       textInputType: TextInputType.emailAddress,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     PasswordTextField(
@@ -100,30 +101,25 @@ class _LoginPageState extends State<LoginPage> {
                       prefixIcon: Icons.password_outlined,
                       hintText: 'Your Strong Password',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        print('goto forget password page!');
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: GestureDetector(
-                          onTap: () =>
-                              Navigator.pushNamed(context, forgetPasswordPage),
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: KsuboptionColor,
-                                fontSize: 13,
-                                fontFamily: 'CharisSILB'),
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: GestureDetector(
+                        onTap: () =>
+                            Navigator.pushNamed(context, forgetPasswordPage),
+                        child: const Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: KsuboptionColor,
+                              fontSize: 13,
+                              fontFamily: 'CharisSILB'),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     ApplyButton(
@@ -133,13 +129,13 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: Login,
                       color: KButtonBackgroundColor1.withOpacity(0.9),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "Not Member? ",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -149,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         GestureDetector(
                           onTap: widget.onTap,
-                          child: Text("Register Now!",
+                          child: const Text("Register Now!",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: KsuboptionColor,
@@ -158,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                   ],

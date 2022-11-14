@@ -5,16 +5,16 @@ import 'package:crypto_wallet/model/provider_model.dart';
 
 class IncomeExpenseToggleButton extends StatefulWidget {
   final List<Widget> _options = [
-    Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+    const Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
       child: Text(
         'Income',
         style: TextStyle(
             fontSize: 18.5, fontFamily: 'RobotoR', fontWeight: FontWeight.w400),
       ),
     ),
-    Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+    const Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
       child: Text(
         'Expense',
         style: TextStyle(
@@ -22,7 +22,7 @@ class IncomeExpenseToggleButton extends StatefulWidget {
       ),
     ),
   ];
-  List<bool> _isSelected = <bool>[true, false];
+  final List<bool> _isSelected = <bool>[true, false];
 
   IncomeExpenseToggleButton({Key? key}) : super(key: key);
 
@@ -37,7 +37,7 @@ class _IncomeExpenseToggleButtonState extends State<IncomeExpenseToggleButton> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Color.fromARGB(255, 67, 67, 67),
+        color: const Color.fromARGB(255, 67, 67, 67),
       ),
       child: ToggleButtons(
           direction: Axis.horizontal,
@@ -54,14 +54,11 @@ class _IncomeExpenseToggleButtonState extends State<IncomeExpenseToggleButton> {
           selectedBorderColor: Colors.white,
           selectedColor: KPrimaryColor,
           fillColor: Colors.grey.shade100,
-          //    fillColor: Colors.white,
-          // color: Colors.grey.shade100,
           color: Colors.white,
           borderColor: Colors.grey.shade100,
           borderWidth: 1,
-          //   disabledColor: Color.fromARGB(255, 221, 0, 0),
-          children: widget._options,
-          isSelected: widget._isSelected),
+          isSelected: widget._isSelected,
+          children: widget._options),
     );
   }
 }

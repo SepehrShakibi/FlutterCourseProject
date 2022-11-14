@@ -8,9 +8,11 @@ class PasswordTextField extends StatelessWidget {
   final TextEditingController controller;
 
   const PasswordTextField(
-      {required this.prefixIcon,
+      {Key? key,
+      required this.prefixIcon,
       required this.hintText,
-      required this.controller});
+      required this.controller})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -19,10 +21,10 @@ class PasswordTextField extends StatelessWidget {
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: KdisableBorderColor)),
+                borderSide: const BorderSide(color: KdisableBorderColor)),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: KborderColor, width: 2)),
+                borderSide: const BorderSide(color: KborderColor, width: 2)),
             prefixIcon: Icon(
               prefixIcon,
               color: KiconColor,
@@ -30,6 +32,6 @@ class PasswordTextField extends StatelessWidget {
             hintText: hintText,
             hintStyle:
                 TextStyle(color: Colors.grey[400], fontFamily: 'OpenSansR')),
-        style: TextStyle(color: Colors.white, fontFamily: 'OpenSansR'));
+        style: const TextStyle(color: Colors.white, fontFamily: 'OpenSansR'));
   }
 }

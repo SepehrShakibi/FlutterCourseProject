@@ -8,7 +8,7 @@ class BTCRecentTransactionIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
+    return const Icon(
       CryptoFontIcons.BTC,
       size: 38,
       color: Color(0xFFea973d),

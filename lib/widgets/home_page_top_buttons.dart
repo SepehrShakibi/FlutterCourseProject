@@ -1,13 +1,8 @@
-import 'package:crypto_font_icons/crypto_font_icons.dart';
-import 'package:crypto_wallet/constant.dart';
 import 'package:crypto_wallet/constants/route.dart';
 import 'package:crypto_wallet/popup/exhange_dialog.dart';
-import 'package:crypto_wallet/widgets/icons/btc_recent_transaction_icon.dart';
 import 'package:crypto_wallet/widgets/vertical_line.dart';
 import 'package:flutter/material.dart';
-
 import 'home_page_button.dart';
-import 'icons/eth_recent_transaction_icon.dart';
 import '../popup/income_expense_dialog.dart';
 
 class HomePageTopButtons extends StatelessWidget {
@@ -20,7 +15,7 @@ class HomePageTopButtons extends StatelessWidget {
       color: Colors.transparent,
       elevation: 15,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
         decoration: BoxDecoration(
             color: Colors.white.withOpacity(1),
             borderRadius: BorderRadius.circular(45)),
@@ -37,7 +32,7 @@ class HomePageTopButtons extends StatelessWidget {
                 title: "Exchange",
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 1,
               child: VerticalLine(
                 horizantalSpace: 0,
@@ -55,7 +50,7 @@ class HomePageTopButtons extends StatelessWidget {
                 title: "In/Ex",
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 1,
               child: VerticalLine(
                 horizantalSpace: 0,

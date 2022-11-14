@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
@@ -12,6 +14,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 Future<void> ExhcangeDialog(BuildContext context, Size size) {
+  final _providerContext = Provider.of<ModelProvider>(context, listen: false);
+  final _navigatorPop = Navigator.pop(context);
+
   DateTime dateTime;
 
 //price
@@ -30,10 +35,12 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
   String _selectedMenuValueSecond = 'ETH';
   final List<DropdownMenuItem<String>> _dropdownMenuItem = [
     DropdownMenuItem(
+      value: "USD",
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         textBaseline: TextBaseline.alphabetic,
+        // ignore: prefer_const_literals_to_create_immutables
         children: [
           const Icon(
             FontAwesomeIcons.dollarSign,
@@ -50,11 +57,12 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
           )
         ],
       ),
-      value: "USD",
     ),
     DropdownMenuItem(
+      value: 'BTC',
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
+        // ignore: prefer_const_literals_to_create_immutables
         children: [
           const Icon(
             CryptoFontIcons.BTC,
@@ -71,7 +79,6 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
           )
         ],
       ),
-      value: 'BTC',
     ),
     DropdownMenuItem(
       // ignore: sort_child_properties_last
@@ -96,6 +103,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
       value: 'ETH',
     ),
     DropdownMenuItem(
+      value: 'USDT',
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -114,11 +122,10 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
           )
         ],
       ),
-      value: 'USDT',
     ),
   ];
   /////////////////////////
-  List<bool> _isSelected = [true, false];
+
   return showDialog(
     context: context,
     builder: (context) => StatefulBuilder(
@@ -394,8 +401,8 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                       listen: false)
                                   .UpdateFirestoreBalance();
 
-                              Provider.of<ModelProvider>(context, listen: false)
-                                  .addLocalTransacion(TransactionModel(
+                              _providerContext.addLocalTransacion(
+                                  TransactionModel(
                                       type: 'exchange',
                                       beginCurrency: _selectedMenuValueFirst,
                                       endCurrency: _selectedMenuValueSecond,
@@ -418,7 +425,7 @@ Future<void> ExhcangeDialog(BuildContext context, Size size) {
                                 'dateTime': Timestamp.fromDate(dateTime)
                               });
 
-                              Navigator.pop(context);
+                              _navigatorPop;
                             },
                             color: KButtonBackgroundColor1,
                             text: 'Apply'),
@@ -456,13 +463,13 @@ class CurrencyTextWidget extends StatelessWidget {
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ExchangeDropdownButton(),
-              const Divider(
+            children: const [
+              ExchangeDropdownButton(),
+              Divider(
                 color: Colors.white,
                 thickness: 0.7,
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                 child: Text(
                   "Final Price",

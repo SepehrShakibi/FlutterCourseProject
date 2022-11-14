@@ -4,7 +4,8 @@ class TopCardSubCurrency extends StatelessWidget {
   final IconData icon;
   final String price;
 
-  const TopCardSubCurrency({required this.icon, required this.price});
+  const TopCardSubCurrency({Key? key, required this.icon, required this.price})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class TopCardSubCurrency extends StatelessWidget {
         ),
         Text(
           price,
-          style: TextStyle(
+          style: const TextStyle(
               fontFamily: 'CharisSILB',
               fontWeight: FontWeight.bold,
               fontSize: 20,

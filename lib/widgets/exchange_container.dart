@@ -11,16 +11,18 @@ class ExchangeContainer extends StatelessWidget {
   final String date;
 
   const ExchangeContainer(
-      {required this.color,
+      {Key? key,
+      required this.color,
       required this.beginIcon,
       required this.endIcon,
       required this.count,
       required this.time,
-      required this.date});
+      required this.date})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 7),
+        padding: const EdgeInsets.symmetric(horizontal: 7),
         height: 72,
         width: double.infinity,
         decoration: BoxDecoration(

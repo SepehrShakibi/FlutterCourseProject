@@ -14,11 +14,13 @@ class ForgetPasswordPage extends StatefulWidget {
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   final TextEditingController _emailController = TextEditingController();
   Future<void> sendForgetPasswordEmail() async {
+    final navigator = Navigator.pop(context);
+
     try {
       if (_emailController.text.trim().isNotEmpty) {
         await FirebaseAuth.instance
             .sendPasswordResetEmail(email: _emailController.text.trim());
-        Navigator.pop(context);
+        navigator;
       } else {
         var snackBar = const SnackBar(
             backgroundColor: Color.fromARGB(255, 28, 28, 28),
@@ -79,7 +81,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    inputTextField(
+                    InputTextField(
                       controller: _emailController,
                       textInputType: TextInputType.emailAddress,
                       hintText: 'CryptoWallet@email.com',

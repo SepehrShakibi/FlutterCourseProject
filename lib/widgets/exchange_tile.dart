@@ -10,11 +10,13 @@ class ExhcangeTile extends StatelessWidget {
   final String date;
 
   const ExhcangeTile(
-      {required this.beginIcon,
+      {Key? key,
+      required this.beginIcon,
       required this.endIcon,
       required this.count,
       required this.time,
-      required this.date});
+      required this.date})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class ExhcangeTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               beginIcon,
-              Icon(
+              const Icon(
                 FontAwesomeIcons.arrowRight,
                 size: 30,
                 color: KiconColor,
@@ -40,7 +42,7 @@ class ExhcangeTile extends StatelessWidget {
           flex: 1,
           child: Text(
             count,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 27,
                 fontFamily: 'CharisSILB',
                 fontWeight: FontWeight.bold,

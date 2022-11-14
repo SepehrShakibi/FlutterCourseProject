@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_wallet/model/transaction.dart';
 import 'package:crypto_wallet/service/networking.dart';
@@ -11,15 +13,15 @@ import '../widgets/icons/eth_recent_transaction_icon.dart';
 
 class ModelProvider extends ChangeNotifier {
   //price property
-  double BTCPrice = 0.0;
-  double ETHPrice = 0.0;
-  double USDTPrice = 0.0;
+  double btcPrice = 0.0;
+  double ethPrice = 0.0;
+  double usdtPrice = 0.0;
 
   //balance property
-  double BTCBalance = 0.0;
-  double ETHBalance = 0.0;
-  double USDTBalance = 0.0;
-  double USDBalance = 0.0;
+  double btcBalance = 0.0;
+  double ethBalance = 0.0;
+  double usdtBalance = 0.0;
+  double usdBalance = 0.0;
 
   //transaction property
   String beginCurrency = 'USD';
@@ -30,37 +32,38 @@ class ModelProvider extends ChangeNotifier {
   List<TransactionModel> transactionList = [];
 
   //chart list
+  // ignore:
   List BTCChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
   List ETHChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
   List USDTChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 
   /// price getter
-  double get GetBTCPrice => BTCPrice;
-  double get GetETHPrice => ETHPrice;
-  double get GetUSDTPrice => USDTPrice;
+  double get GetBTCPrice => btcPrice;
+  double get GetETHPrice => ethPrice;
+  double get GetUSDTPrice => usdtPrice;
 
   ///balance getter
-  double get GetBTCBalance => BTCBalance;
-  double get GetETHBalance => ETHBalance;
-  double get GetUSDTBalance => USDTBalance;
-  double get GetUSDBalance => USDBalance;
+  double get GetBTCBalance => btcBalance;
+  double get GetETHBalance => ethBalance;
+  double get GetUSDTBalance => usdtBalance;
+  double get GetUSDBalance => usdBalance;
   //chart list getter
   List get GetBTCChartlist => BTCChart;
   List get GetETHChartlist => ETHChart;
   List get GetUSDTChartlist => USDTChart;
   //price setter
   void setBTCPrice(double btcprice) {
-    BTCPrice = btcprice;
+    btcPrice = btcprice;
     notifyListeners();
   }
 
   void setETHPrice(double ethprice) {
-    ETHPrice = ethprice;
+    ethPrice = ethprice;
     notifyListeners();
   }
 
   void setUSDTPrice(double usdtprice) {
-    USDTPrice = usdtprice;
+    usdtPrice = usdtprice;
     notifyListeners();
   }
 
@@ -74,35 +77,33 @@ class ModelProvider extends ChangeNotifier {
 
   //balance setter
   void setUSDBalance(double usdbalance) {
-    USDBalance = usdbalance;
+    usdBalance = usdbalance;
     notifyListeners();
   }
 
   void setUSDTBalance(double usdtbalance) {
-    USDTBalance = usdtbalance;
+    usdtBalance = usdtbalance;
     notifyListeners();
   }
 
   void setETHBalance(double ethbalance) {
-    ETHBalance = ethbalance;
+    ethBalance = ethbalance;
     notifyListeners();
   }
 
   void setBTCBalance(double btcbalance) {
-    BTCBalance = btcbalance;
+    btcBalance = btcbalance;
     notifyListeners();
   }
 
   // transaction setter
   void setBeginCurrency(String beginCurrency) {
     beginCurrency = beginCurrency;
-    print(beginCurrency);
     notifyListeners();
   }
 
   void setEndCurrency(String endCurrency) {
     endCurrency = endCurrency;
-    print(endCurrency);
     notifyListeners();
   }
 
@@ -113,7 +114,6 @@ class ModelProvider extends ChangeNotifier {
 
   void setIsIncomeTransaction(bool isIncome) {
     isIncome = isIncome;
-    print(isIncome);
     notifyListeners();
   }
 
@@ -146,7 +146,6 @@ class ModelProvider extends ChangeNotifier {
   void setUSDTChartList(List chartList) {
     for (int i = 0; i < chartList.length; i++) {
       USDTChart[i] = chartList[i]['close'] + 0.0;
-      print(USDTChart[i]);
     }
 
     notifyListeners();
@@ -154,7 +153,8 @@ class ModelProvider extends ChangeNotifier {
 
   //inital firestore and local balance
   Future<bool> initialBlance() async {
-    String _uid = await FirebaseAuth.instance.currentUser!.uid;
+    // ignore: no_leading_underscores_for_local_identifiers
+    String _uid = FirebaseAuth.instance.currentUser!.uid;
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('users')
         .doc(_uid)
@@ -174,10 +174,8 @@ class ModelProvider extends ChangeNotifier {
         setUSDTBalance(0.0);
 
         notifyListeners();
-        print('now existed!');
         return true;
       }
-      print('was exi..');
 
       setUSDBalance(documentSnapshot.get('USD').toDouble());
       setBTCBalance(documentSnapshot.get('BTC').toDouble());
@@ -192,7 +190,7 @@ class ModelProvider extends ChangeNotifier {
   //set local balance variable
 
   Future<void> UpdateFirestoreBalance() async {
-    String uid = await FirebaseAuth.instance.currentUser!.uid;
+    String uid = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance
         .collection('users')
         .doc(uid)

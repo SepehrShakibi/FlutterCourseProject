@@ -2,19 +2,23 @@ import 'package:crypto_wallet/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class exchange_box extends StatelessWidget {
+class ExchangeBox extends StatelessWidget {
   final Widget beginIcon;
   final Widget endIcon;
   final String count;
 
-  const exchange_box(
-      {required this.beginIcon, required this.endIcon, required this.count});
+  const ExchangeBox({
+    Key? key,
+    required this.beginIcon,
+    required this.endIcon,
+    required this.count,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        padding: EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         height: 120,
         width: 120,
         decoration: BoxDecoration(
@@ -30,7 +34,7 @@ class exchange_box extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   beginIcon,
-                  Icon(
+                  const Icon(
                     FontAwesomeIcons.arrowRight,
                     size: 30,
                     color: KiconColor,
@@ -43,7 +47,7 @@ class exchange_box extends StatelessWidget {
               flex: 1,
               child: Text(
                 count,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     fontFamily: 'CharisSILB',
                     fontWeight: FontWeight.bold,

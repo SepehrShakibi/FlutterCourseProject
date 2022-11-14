@@ -1,5 +1,4 @@
 import 'package:crypto_wallet/widgets/register_page_widget/input/register_name_text_field.dart';
-import 'package:crypto_wallet/widgets/register_page_widget/input/register_name_text_field.dart';
 import 'package:flutter/material.dart';
 
 class InputListtileRegisterPage extends StatelessWidget {
@@ -10,11 +9,13 @@ class InputListtileRegisterPage extends StatelessWidget {
   final TextEditingController controller;
 
   const InputListtileRegisterPage(
-      {required this.title,
+      {Key? key,
+      required this.title,
       required this.hinttext,
       required this.icon,
       required this.textInputType,
-      required this.controller});
+      required this.controller})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +25,7 @@ class InputListtileRegisterPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 5, top: 10, bottom: 5),
           child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
                 fontFamily: 'CharisSILB',

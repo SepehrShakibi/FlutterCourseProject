@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,13 +22,14 @@ const KSubtitleColor = Color(0xFFffffff);
 
 final List<DropdownMenuItem<String>> dropdownMenuItemConst = [
   DropdownMenuItem(
+    value: "USD",
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       textBaseline: TextBaseline.alphabetic,
-      children: [
+      children: const [
         Icon(
-          FontAwesomeIcons.usd,
+          FontAwesomeIcons.dollarSign,
           size: 33.5,
           color: Colors.white,
         ),
@@ -40,12 +43,12 @@ final List<DropdownMenuItem<String>> dropdownMenuItemConst = [
         )
       ],
     ),
-    value: "USD",
   ),
   DropdownMenuItem(
+    value: 'BTC',
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      children: [
+      children: const [
         Icon(
           CryptoFontIcons.BTC,
           size: 33.5,
@@ -61,9 +64,9 @@ final List<DropdownMenuItem<String>> dropdownMenuItemConst = [
         )
       ],
     ),
-    value: 'BTC',
   ),
   DropdownMenuItem(
+    value: 'ETH',
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -72,19 +75,19 @@ final List<DropdownMenuItem<String>> dropdownMenuItemConst = [
           size: 33.5,
           color: Colors.blueAccent.shade400,
         ),
-        SizedBox(
+        const SizedBox(
           width: 5,
         ),
-        Text(
+        const Text(
           "ETH",
           style: TextStyle(
               fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
         )
       ],
     ),
-    value: 'ETH',
   ),
   DropdownMenuItem(
+    value: 'USDT',
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -93,16 +96,15 @@ final List<DropdownMenuItem<String>> dropdownMenuItemConst = [
           size: 33.5,
           color: Colors.greenAccent.shade400,
         ),
-        SizedBox(
+        const SizedBox(
           width: 5,
         ),
-        Text(
+        const Text(
           "USDT",
           style: TextStyle(
               fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
         )
       ],
     ),
-    value: 'USDT',
   ),
 ];

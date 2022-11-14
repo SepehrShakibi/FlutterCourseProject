@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constant.dart';
-
 class ApplyButton extends StatelessWidget {
   final Size size;
   final VoidCallback onTap;
@@ -9,11 +7,13 @@ class ApplyButton extends StatelessWidget {
   final String text;
   final double width;
   const ApplyButton(
-      {required this.size,
+      {Key? key,
+      required this.size,
       required this.onTap,
       required this.color,
       required this.text,
-      required this.width});
+      required this.width})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ApplyButton extends StatelessWidget {
             color: color, borderRadius: BorderRadius.circular(15)),
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'OpenSansL',
             color: Colors.white,
             fontSize: 20,

@@ -2,8 +2,6 @@ import 'package:crypto_wallet/screens/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import 'AuthPage.dart';
 
@@ -16,9 +14,9 @@ class UserPage extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return HomePage();
+          return const HomePage();
         } else {
-          return AuthPage();
+          return const AuthPage();
         }
       },
     );

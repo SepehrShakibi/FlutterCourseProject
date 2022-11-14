@@ -1,19 +1,12 @@
 import 'package:crypto_wallet/constant.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/widgets/expense_container.dart';
-import 'package:crypto_wallet/widgets/icons/btc_recent_transaction_icon.dart';
-import 'package:crypto_wallet/widgets/icons/eth_recent_transaction_icon.dart';
-import 'package:crypto_wallet/widgets/icons/usd_recent_transaction_icon.dart';
 import 'package:crypto_wallet/widgets/exchange_container.dart';
-import 'package:crypto_wallet/widgets/icons/usdt_recent_transaction_icon.dart';
 import 'package:crypto_wallet/widgets/income_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/home_page_recent_transaction/box/income_box.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
 class TransactionPage extends StatefulWidget {
@@ -26,7 +19,6 @@ class TransactionPage extends StatefulWidget {
 class _TransactionPageState extends State<TransactionPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Provider.of<ModelProvider>(context, listen: false)
@@ -36,15 +28,14 @@ class _TransactionPageState extends State<TransactionPage> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
       // backgroundColor: Color.fromARGB(255, 28, 28, 28),
-      backgroundColor: Color.fromARGB(255, 16, 16, 16),
+      backgroundColor: const Color.fromARGB(255, 16, 16, 16),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 18.0),
+        title: const Padding(
+          padding: EdgeInsets.only(top: 18.0),
           child: Text(
             "Transaction List",
             style: TextStyle(
@@ -56,7 +47,7 @@ class _TransactionPageState extends State<TransactionPage> {
         leading: Padding(
             padding: const EdgeInsets.only(top: 13.0),
             child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   size: 35,
                 ),
@@ -64,13 +55,12 @@ class _TransactionPageState extends State<TransactionPage> {
       ),
 
       body: Container(
-        padding: EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 10),
         width: double.infinity,
         child: Provider.of<ModelProvider>(context, listen: false)
-                    .getTransactionList
-                    .length ==
-                0
-            ? Text(
+                .getTransactionList
+                .isEmpty
+            ? const Text(
                 "No Transaction",
                 style: TextStyle(
                   color: Colors.grey,
@@ -184,7 +174,7 @@ class _TransactionPageState extends State<TransactionPage> {
                       );
 
                     default:
-                      return Text('NoThing');
+                      return const Text('NoThing');
                   }
                 },
               ),

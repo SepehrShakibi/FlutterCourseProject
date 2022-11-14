@@ -1,7 +1,5 @@
-import 'package:crypto_font_icons/crypto_font_icon_data.dart';
 import 'package:crypto_wallet/widgets/home_page_chart_middle.dart';
 import 'package:flutter/material.dart';
-import 'package:crypto_font_icons/crypto_font_icons.dart';
 
 class CryptoTile extends StatelessWidget {
   final String currency;
@@ -15,7 +13,8 @@ class CryptoTile extends StatelessWidget {
   final Color endBleowChartColor;
   final List spotlist;
   const CryptoTile(
-      {required this.icon,
+      {Key? key,
+      required this.icon,
       required this.price,
       required this.beginChartColor,
       required this.endChartColor,
@@ -23,12 +22,13 @@ class CryptoTile extends StatelessWidget {
       required this.endBleowChartColor,
       required this.iconColor,
       required this.currency,
-      required this.spotlist});
+      required this.spotlist})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 0, left: 10),
+      padding: const EdgeInsets.only(right: 0, left: 10),
       // height: 200,
       height: 72,
       width: double.infinity,
@@ -45,14 +45,14 @@ class CryptoTile extends StatelessWidget {
           ),
           Text(
             "$price\$",
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 22,
                 fontFamily: 'CharisSILB',
                 color: Color(0xFFECEBE9)),
           ),
           Container(
               height: 67,
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               width: 150,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(15)),

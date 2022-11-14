@@ -1,7 +1,7 @@
 import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/widgets/top_card_sub_currency.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:provider/provider.dart';
 
@@ -31,10 +31,10 @@ class HomePageTopCard extends StatelessWidget {
             // ])
             ),
         child: Column(children: [
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             "Balance",
             style: TextStyle(
                 fontFamily: 'BebasNeueR',
@@ -43,14 +43,14 @@ class HomePageTopCard extends StatelessWidget {
                 color: Color(0xFFF4F9FC)),
           ),
           Text(
-            "${Provider.of<ModelProvider>(context).USDBalance}  \$",
-            style: TextStyle(
+            "${Provider.of<ModelProvider>(context).usdBalance}  \$",
+            style: const TextStyle(
                 fontFamily: 'CharisSILB',
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
                 color: Color(0xFFF4F9FC)),
           ),
-          Divider(
+          const Divider(
             color: Color(0xFFF4F9FC),
             indent: 30,
             endIndent: 30,

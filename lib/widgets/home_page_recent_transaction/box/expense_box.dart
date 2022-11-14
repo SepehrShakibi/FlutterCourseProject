@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ExpenseBox extends StatelessWidget {
   final Widget icon;
   final String count;
 
-  const ExpenseBox({required this.icon, required this.count});
+  const ExpenseBox({
+    Key? key,
+    required this.icon,
+    required this.count,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        padding: EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         height: 120,
         width: 120,
         decoration: BoxDecoration(
@@ -26,14 +29,14 @@ class ExpenseBox extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.arrow_downward,
                     size: 34,
                     color: Color.fromARGB(255, 227, 46, 46),
                   ),
                   Text(
                     "+$count",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontFamily: 'CharisSILB',
                       fontWeight: FontWeight.bold,

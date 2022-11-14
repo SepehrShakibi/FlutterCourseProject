@@ -1,7 +1,5 @@
-import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePageChartMiddle extends StatefulWidget {
   final Color beginChartColor;
@@ -12,13 +10,15 @@ class HomePageChartMiddle extends StatefulWidget {
   final String currency;
   final List spotlist;
 
-  HomePageChartMiddle(
-      {required this.beginChartColor,
+  const HomePageChartMiddle(
+      {Key? key,
+      required this.beginChartColor,
       required this.endChartColor,
       required this.beginBleowChartColor,
       required this.endBleowChartColor,
       required this.currency,
-      required this.spotlist});
+      required this.spotlist})
+      : super(key: key);
 
   @override
   State<HomePageChartMiddle> createState() => _HomePageChartMiddleState();

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class HomePageButton extends StatefulWidget {
@@ -7,8 +5,12 @@ class HomePageButton extends StatefulWidget {
   final String title;
   final VoidCallback onPressed;
 
-  const HomePageButton(
-      {required this.icon, required this.title, required this.onPressed});
+  const HomePageButton({
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   State<HomePageButton> createState() => _HomePageButtonState();

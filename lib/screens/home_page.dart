@@ -1,31 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crypto_font_icons/crypto_font_icon_data.dart';
+
 import 'package:crypto_wallet/constant.dart';
 import 'package:crypto_wallet/constants/route.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
-import 'package:crypto_wallet/widgets/icons/btc_recent_transaction_icon.dart';
-import 'package:crypto_wallet/widgets/icons/eth_recent_transaction_icon.dart';
+
 import 'package:crypto_wallet/widgets/home_page_recent_transaction/box/exchange_box.dart';
-import 'package:crypto_wallet/widgets/home_page_button.dart';
-import 'package:crypto_wallet/widgets/home_page_chart_middle.dart';
-import 'package:crypto_wallet/widgets/crypto_tile.dart';
+
 import 'package:crypto_wallet/widgets/home_page_top_card.dart';
 import 'package:crypto_wallet/widgets/home_pages_crypto_tiles.dart';
 import 'package:crypto_wallet/widgets/home_page_recent_transaction/box/income_box.dart';
 import 'package:crypto_wallet/widgets/home_page_recent_transaction/box/expense_box.dart';
-import 'package:crypto_wallet/widgets/top_card_sub_currency.dart';
-import 'package:crypto_wallet/widgets/icons/usd_recent_transaction_icon.dart';
-import 'package:crypto_wallet/widgets/icons/usdt_recent_transaction_icon.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:provider/provider.dart';
 
 import '../widgets/home_page_top_buttons.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:crypto_font_icons/crypto_font_icons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -37,22 +28,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Provider.of<ModelProvider>(context, listen: false).initialBlance();
+      // ignore: use_build_context_synchronously
       await Provider.of<ModelProvider>(context, listen: false)
           .initialTransaction();
-      print('object');
 
+      // ignore: use_build_context_synchronously
       await Provider.of<ModelProvider>(context, listen: false).setPriceOnline();
+      // ignore: use_build_context_synchronously
       await Provider.of<ModelProvider>(context, listen: false).setCharts();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ModelProvider>(context, listen: false);
     var uid = FirebaseAuth.instance.currentUser!.uid;
     var size = MediaQuery.of(context).size;
     return Scaffold(
@@ -60,7 +52,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         //    elevation: 5,
-        title: Text(
+        title: const Text(
           "Home Page",
           style: TextStyle(
               fontFamily: 'CharisSILB', color: Colors.white, fontSize: 27),
@@ -71,10 +63,9 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
-                Provider.of<ModelProvider>(context, listen: false)
-                    .resetLocalTransacion;
+                provider.resetLocalTransacion;
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.logout,
                 //  color: KiconColor,
                 size: 35,
@@ -84,7 +75,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         height: size.height,
         width: size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/home_page_2.jpg'),
                 fit: BoxFit.cover,
@@ -108,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             height: size.height * 0.03,
                           ),
-                          HomePageTopButtons(),
+                          const HomePageTopButtons(),
                           SizedBox(
                             height: size.height * 0.03,
                           ),
@@ -119,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Crypto",
                                     style: TextStyle(
                                         color: KSubtitleColor,
@@ -132,11 +123,9 @@ class _HomePageState extends State<HomePage> {
                                       await Provider.of<ModelProvider>(context,
                                               listen: false)
                                           .setPriceOnline();
-                                      await Provider.of<ModelProvider>(context,
-                                              listen: false)
-                                          .setCharts();
+                                      await provider.setCharts();
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Update",
                                       style: TextStyle(
                                           color: KSubtitleColor,
@@ -147,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                                   )
                                 ],
                               ),
-                              Divider(
+                              const Divider(
                                 color: KSubtitleColor,
                                 thickness: 1,
                               )
@@ -167,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Recent Transactions",
                                     style: TextStyle(
                                         color: KSubtitleColor,
@@ -178,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                                   TextButton(
                                     onPressed: () => Navigator.pushNamed(
                                         context, transactionListPage),
-                                    child: Text(
+                                    child: const Text(
                                       "See all",
                                       style: TextStyle(
                                           color: KSubtitleColor,
@@ -189,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                                   )
                                 ],
                               ),
-                              Divider(
+                              const Divider(
                                 color: KSubtitleColor,
                                 thickness: 1,
                               )
@@ -209,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                           .orderBy('dateTime')
                           .get(),
                       builder: (context, snapshot) {
-                        return Container(
+                        return SizedBox(
                           height: 110,
                           width: double.infinity,
                           child: ListView.builder(
@@ -241,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                                   );
 
                                 case 'exchange':
-                                  return exchange_box(
+                                  return ExchangeBox(
                                     beginIcon: Provider.of<ModelProvider>(
                                             context,
                                             listen: false)
@@ -280,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                                         .toString(),
                                   );
                                 default:
-                                  return Text('NoThing');
+                                  return const Text('NoThing');
                               }
                             },
                           ),

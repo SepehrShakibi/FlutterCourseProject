@@ -6,9 +6,11 @@ class VerticalLine extends StatelessWidget {
   final double lineHeight;
 
   const VerticalLine(
-      {required this.horizantalSpace,
+      {Key? key,
+      required this.horizantalSpace,
       required this.lineWidth,
-      required this.lineHeight});
+      required this.lineHeight})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
