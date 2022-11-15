@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
-import 'package:crypto_wallet/constants/exchange_dialog_constant.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/model/transaction.dart';
 import 'package:crypto_wallet/widgets/exchange/exchange_dropdown_field.dart';
@@ -12,7 +11,7 @@ import 'package:crypto_wallet/constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-Future<void> exhcangeDialog(BuildContext context, Size size) {
+Future<void> exhcangeTestDialog(BuildContext context, Size size) {
   final provider = Provider.of<ModelProvider>(context, listen: false);
 
   DateTime dateTime;
@@ -26,6 +25,100 @@ Future<void> exhcangeDialog(BuildContext context, Size size) {
   ///
   final TextEditingController firstCountController = TextEditingController();
   ////
+  String finalValue = "";
+
+  ///drop down exchange
+  String selectedMenuValueFirst = 'USD';
+  String selectedMenuValueSecond = 'ETH';
+  final List<DropdownMenuItem<String>> dropdownMenuItem = [
+    DropdownMenuItem(
+      value: "USD",
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        textBaseline: TextBaseline.alphabetic,
+        children: const [
+          Icon(
+            FontAwesomeIcons.dollarSign,
+            size: 33.5,
+            color: Colors.white,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            "USD",
+            style: TextStyle(
+                fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
+          )
+        ],
+      ),
+    ),
+    DropdownMenuItem(
+      value: 'BTC',
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: const [
+          Icon(
+            CryptoFontIcons.BTC,
+            size: 33.5,
+            color: Color(0xFFea973d),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            "BTC",
+            style: TextStyle(
+                fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
+          )
+        ],
+      ),
+    ),
+    DropdownMenuItem(
+      value: 'ETH',
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            CryptoFontIcons.ETH,
+            size: 33.5,
+            color: Colors.blueAccent.shade400,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          const Text(
+            "ETH",
+            style: TextStyle(
+                fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
+          )
+        ],
+      ),
+    ),
+    DropdownMenuItem(
+      value: 'USDT',
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            CryptoFontIcons.USDT,
+            size: 33.5,
+            color: Colors.greenAccent.shade400,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          const Text(
+            "USDT",
+            style: TextStyle(
+                fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
+          )
+        ],
+      ),
+    ),
+  ];
+  /////////////////////////
 
   return showDialog(
     context: context,
@@ -35,11 +128,9 @@ Future<void> exhcangeDialog(BuildContext context, Size size) {
         contentPadding: EdgeInsets.zero,
         backgroundColor: const Color.fromARGB(255, 28, 28, 28),
         content: SizedBox(
-          //    padding: EdgeInsets.symmetric(vertical: 15),
           height: size.height * 0.63,
           width: size.width * 0.95,
           child: SingleChildScrollView(
-            //physics: NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             child: Padding(
               padding:

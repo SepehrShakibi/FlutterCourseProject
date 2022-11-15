@@ -4,6 +4,7 @@ import 'package:crypto_wallet/constant.dart';
 import 'package:crypto_wallet/constants/route.dart';
 import 'package:crypto_wallet/helpers/loading/loading_screen.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
+import 'package:crypto_wallet/popup/home_test_dialog.dart';
 
 import 'package:crypto_wallet/widgets/home_page_recent_transaction/box/exchange_box.dart';
 
@@ -60,9 +61,10 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () async {
-                provider.resetData();
+                await exhcangeTestDialog(context, size);
+                // provider.resetData();
 
-                await FirebaseAuth.instance.signOut();
+                // await FirebaseAuth.instance.signOut();
               },
               icon: const Icon(
                 Icons.logout,
