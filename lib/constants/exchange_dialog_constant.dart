@@ -8,91 +8,70 @@ String finalValue = "";
 String selectedMenuValueFirst = 'USD';
 String selectedMenuValueSecond = 'ETH';
 final List<DropdownMenuItem<String>> dropdownMenuItem = [
-  DropdownMenuItem(
+  const DropdownMenuItem(
     value: "USD",
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      textBaseline: TextBaseline.alphabetic,
-      children: const [
-        Icon(
-          FontAwesomeIcons.dollarSign,
-          size: 33.5,
-          color: Colors.white,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        Text(
-          "USD",
-          style: TextStyle(
-              fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
-        )
-      ],
+    child: DropDownRowWidget(
+      icon: FontAwesomeIcons.dollarSign,
+      color: Colors.white,
+      name: 'BTC',
     ),
   ),
-  DropdownMenuItem(
+  const DropdownMenuItem(
     value: 'BTC',
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: const [
-        Icon(
-          CryptoFontIcons.BTC,
-          size: 33.5,
-          color: Color(0xFFea973d),
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        Text(
-          "BTC",
-          style: TextStyle(
-              fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
-        )
-      ],
+    child: DropDownRowWidget(
+      icon: CryptoFontIcons.ETH,
+      color: Color(0xFFea973d),
+      name: 'BTC',
     ),
   ),
   DropdownMenuItem(
     value: 'ETH',
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(
-          CryptoFontIcons.ETH,
-          size: 33.5,
-          color: Colors.blueAccent.shade400,
-        ),
-        const SizedBox(
-          width: 5,
-        ),
-        const Text(
-          "ETH",
-          style: TextStyle(
-              fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
-        )
-      ],
+    child: DropDownRowWidget(
+      icon: CryptoFontIcons.ETH,
+      color: Colors.blueAccent.shade400,
+      name: 'ETH',
     ),
   ),
   DropdownMenuItem(
     value: 'USDT',
-    child: Row(
+    child: DropDownRowWidget(
+      icon: CryptoFontIcons.USDT,
+      color: Colors.greenAccent.shade400,
+      name: 'USDT',
+    ),
+  ),
+];
+
+class DropDownRowWidget extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String name;
+  const DropDownRowWidget({
+    Key? key,
+    required this.color,
+    required this.icon,
+    required this.name,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(
-          CryptoFontIcons.USDT,
+          icon,
           size: 33.5,
-          color: Colors.greenAccent.shade400,
+          color: color,
         ),
         const SizedBox(
           width: 5,
         ),
-        const Text(
-          "USDT",
-          style: TextStyle(
+        Text(
+          name,
+          style: const TextStyle(
               fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
         )
       ],
-    ),
-  ),
-];
-  /////////////////////////
+    );
+  }
+}
