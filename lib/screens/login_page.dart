@@ -1,11 +1,14 @@
 import 'package:crypto_wallet/constant.dart';
 import 'package:crypto_wallet/constants/route.dart';
+import 'package:crypto_wallet/helpers/loading/loading_screen.dart';
+import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/widgets/login_page_widget/input_text_field.dart';
 import 'package:crypto_wallet/widgets/login_page_widget/password_text_field.dart';
 import 'package:crypto_wallet/widgets/apply_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback onTap;
@@ -21,14 +24,22 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   // ignore: non_constant_identifier_names
-  Future<void> Login() async {
+  void Login(BuildContext context) async {
+    final provider = Provider.of<ModelProvider>(context, listen: false);
     try {
       if (_emailController.text.trim().isNotEmpty &
           _passwordController.text.trim().isNotEmpty) {
+        LoadingScreen().show(context: context, text: 'Please wait a moment...');
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: _emailController.text.trim(),
             password: _passwordController.text.trim());
+        await provider.initialBlance();
+        await provider.initialTransaction();
+        await provider.setPriceOnline();
+        await provider.setCharts();
+        //  provider.resetLocalTransacion();
       } else {
+        LoadingScreen().hide();
         var snackBar = const SnackBar(
             backgroundColor: Color.fromARGB(255, 28, 28, 28),
             content: Text(
@@ -38,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     } catch (e) {
+      LoadingScreen().hide();
       var snackBar = const SnackBar(
           backgroundColor: Color.fromARGB(255, 28, 28, 28),
           content: Text(
@@ -48,9 +60,16 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Provider.of<ModelProvider>(context).resetLocalTransacion();
+  // }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Scaffold(
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: true,
@@ -126,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                       width: size.width,
                       text: 'Login',
                       size: size,
-                      onTap: Login,
+                      onTap: () => Login(context),
                       color: KButtonBackgroundColor1.withOpacity(0.9),
                     ),
                     const SizedBox(

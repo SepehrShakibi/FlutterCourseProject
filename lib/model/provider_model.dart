@@ -12,6 +12,9 @@ import 'package:flutter/cupertino.dart';
 import '../widgets/icons/eth_recent_transaction_icon.dart';
 
 class ModelProvider extends ChangeNotifier {
+  //register signIn variable
+  bool _showLoginPage = true;
+
   //price property
   double btcPrice = 0.0;
   double ethPrice = 0.0;
@@ -32,10 +35,15 @@ class ModelProvider extends ChangeNotifier {
   List<TransactionModel> transactionList = [];
 
   //chart list
-  // ignore:
+
   List BTCChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
   List ETHChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
   List USDTChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+  // login page show getter
+  bool get ShowLoginPage => _showLoginPage;
+  void get ToggleShowLoginPage {
+    _showLoginPage = !_showLoginPage;
+  }
 
   /// price getter
   double get GetBTCPrice => btcPrice;
@@ -122,8 +130,29 @@ class ModelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void resetLocalTransacion(TransactionModel transactionModel) {
+  void resetLocalTransacion() {
     transactionList = [];
+    notifyListeners();
+  }
+
+  void resetData() {
+    btcPrice = 0.0;
+    ethPrice = 0.0;
+    usdtPrice = 0.0;
+
+    //balance property
+    btcBalance = 0.0;
+    usdtBalance = 0.0;
+    ethBalance = 0.0;
+    usdBalance = 0.0;
+
+    transactionList = [];
+
+    //chart list
+
+    BTCChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+    ETHChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+    USDTChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
     notifyListeners();
   }
 

@@ -1,5 +1,4 @@
 import 'package:crypto_wallet/constant.dart';
-import 'package:crypto_wallet/helpers/loading/loading_screen.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/widgets/expense_container.dart';
 import 'package:crypto_wallet/widgets/exchange_container.dart';

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:crypto_wallet/constant.dart';
 import 'package:crypto_wallet/constants/route.dart';
+import 'package:crypto_wallet/helpers/loading/loading_screen.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 
 import 'package:crypto_wallet/widgets/home_page_recent_transaction/box/exchange_box.dart';
@@ -10,12 +11,9 @@ import 'package:crypto_wallet/widgets/home_page_top_card.dart';
 import 'package:crypto_wallet/widgets/home_pages_crypto_tiles.dart';
 import 'package:crypto_wallet/widgets/home_page_recent_transaction/box/income_box.dart';
 import 'package:crypto_wallet/widgets/home_page_recent_transaction/box/expense_box.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-
 import '../widgets/home_page_top_buttons.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,25 +26,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    final provider = Provider.of<ModelProvider>(context, listen: false);
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await Provider.of<ModelProvider>(context, listen: false).initialBlance();
-      // ignore: use_build_context_synchronously
-      await Provider.of<ModelProvider>(context, listen: false)
-          .initialTransaction();
-
-      // ignore: use_build_context_synchronously
-      await Provider.of<ModelProvider>(context, listen: false).setPriceOnline();
-      // ignore: use_build_context_synchronously
-      await Provider.of<ModelProvider>(context, listen: false).setCharts();
+      LoadingScreen().show(context: context, text: 'Please wait a moment....');
+      await provider.initialBlance();
+      await provider.initialTransaction();
+      await provider.setPriceOnline();
+      await provider.setCharts();
+      LoadingScreen().hide();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ModelProvider>(context, listen: false);
+    //final provider = Provider.of<ModelProvider>(context, listen: false);
     var uid = FirebaseAuth.instance.currentUser!.uid;
     var size = MediaQuery.of(context).size;
+
+    final provider = Provider.of<ModelProvider>(context, listen: false);
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
@@ -61,8 +60,9 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () async {
+                provider.resetData();
+
                 await FirebaseAuth.instance.signOut();
-                provider.resetLocalTransacion;
               },
               icon: const Icon(
                 Icons.logout,
@@ -88,7 +88,6 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SizedBox(
                             height: size.height * 0.025,
@@ -118,10 +117,14 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   TextButton(
                                     onPressed: () async {
+                                      LoadingScreen().show(
+                                          context: context,
+                                          text: 'Please wait a moment....');
                                       await Provider.of<ModelProvider>(context,
                                               listen: false)
                                           .setPriceOnline();
                                       await provider.setCharts();
+                                      LoadingScreen().hide();
                                     },
                                     child: const Text(
                                       "Update",

@@ -47,6 +47,8 @@ dependencies:
   firebase_auth: ^3.10.0
   cloud_firestore: ^3.4.9
   http: ^0.13.5
+  swipe:
+  custom_refresh_indicator:
 
 dev_dependencies:
   flutter_test:

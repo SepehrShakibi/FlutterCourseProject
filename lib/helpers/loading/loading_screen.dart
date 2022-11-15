@@ -46,9 +46,10 @@ class LoadingScreen {
           color: Colors.black.withAlpha(150),
           child: Center(
             child: Container(
+              padding: const EdgeInsets.all(16.0),
               constraints: BoxConstraints(
                 maxWidth: size.width * 0.8,
-                maxHeight: size.width * 0.5,
+                maxHeight: size.width * 0.8,
                 minWidth: size.width * 0.5,
               ),
               decoration: BoxDecoration(
@@ -63,7 +64,7 @@ class LoadingScreen {
                     ),
                     const CircularProgressIndicator.adaptive(),
                     const SizedBox(
-                      height: 10,
+                      height: 13,
                     ),
                     StreamBuilder(
                       stream: _text.stream,
@@ -72,6 +73,10 @@ class LoadingScreen {
                           return Text(
                             snapshot.data as String,
                             textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontFamily: 'RobotoR',
+                              fontSize: 15,
+                            ),
                           );
                         } else {
                           return Container();

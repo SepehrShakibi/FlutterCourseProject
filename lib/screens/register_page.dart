@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_wallet/constant.dart';
+import 'package:crypto_wallet/helpers/loading/loading_screen.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 
 import 'package:crypto_wallet/widgets/register_page_widget/password/registerpage_password_listtile.dart';
@@ -82,19 +83,28 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future signUp() async {
-    final provider = Provider.of<ModelProvider>(context, listen: false);
     Provider.of<ModelProvider>(context, listen: false).resetLocalTransacion;
     if (PasswordConfirm()) {
+      LoadingScreen().show(context: context, text: 'Please wait a moment....');
+      // provider.resetLocalTransacion();
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim());
       await addUser(_firstnameController.text.trim(),
           _lastnameController.text.trim(), _emailController.text.trim());
-      await provider.setPriceOnline();
-      await provider.setCharts();
-      await provider.initialTransaction();
+
+      // await provider.setPriceOnline();
+      // await provider.setCharts();
+      // await provider.initialTransaction();
+      // LoadingScreen().hide();
     }
   }
+
+  // @override
+  // void initState() {
+  //   Provider.of<ModelProvider>(context).resetLocalTransacion();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

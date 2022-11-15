@@ -19,17 +19,10 @@ class HomePageTopCard extends StatelessWidget {
       color: Colors.transparent,
       elevation: 15,
       child: Container(
-        // height: size.height / 5,
         width: size.width * 0.9,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: Colors.blueAccent.withOpacity(0.9)
-            // color: Color(0xFFC0C7CF).withOpacity(0.8),
-            // gradient: LinearGradient(colors: [
-            //   Color(0xFF036280).withOpacity(0.5),
-            //   Color(0xFF036280),
-            // ])
-            ),
+            color: Colors.blueAccent.withOpacity(0.9)),
         child: Column(children: [
           const SizedBox(
             height: 10,
@@ -38,7 +31,6 @@ class HomePageTopCard extends StatelessWidget {
             "Balance",
             style: TextStyle(
                 fontFamily: 'BebasNeueR',
-                //   fontWeight: FontWeight.bold,
                 fontSize: 35,
                 color: Color(0xFFF4F9FC)),
           ),
