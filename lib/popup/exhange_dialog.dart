@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_wallet/constants/exchange_dialog_constant.dart';
+import 'package:crypto_wallet/helpers/loading/loading_screen.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/model/transaction.dart';
-import 'package:crypto_wallet/widgets/exchange/exchange_dropdown_field.dart';
-
 import 'package:crypto_wallet/widgets/apply_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +17,9 @@ Future<void> exhcangeDialog(BuildContext context, Size size) {
 
 //price
   double firstPrice = 1.0;
-  double secondPrice =
-      Provider.of<ModelProvider>(context, listen: false).GetETHPrice;
+  double secondPrice = provider.GetETHPrice;
 
-  ///
-  ///
   final TextEditingController firstCountController = TextEditingController();
-  ////
 
   return showDialog(
     context: context,
@@ -82,10 +77,7 @@ Future<void> exhcangeDialog(BuildContext context, Size size) {
                                   onChanged: (String? value) {
                                     setState(() {
                                       selectedMenuValueFirst = value!;
-                                      firstPrice = Provider.of<ModelProvider>(
-                                              context,
-                                              listen: false)
-                                          .getPrice(value);
+                                      firstPrice = provider.getPrice(value);
                                       if (firstCountController
                                           .text.isNotEmpty) {
                                         finalValue = (double.parse(
@@ -160,10 +152,7 @@ Future<void> exhcangeDialog(BuildContext context, Size size) {
                                   onChanged: (String? value) {
                                     setState(() {
                                       selectedMenuValueSecond = value!;
-                                      secondPrice = Provider.of<ModelProvider>(
-                                              context,
-                                              listen: false)
-                                          .getPrice(value);
+                                      secondPrice = provider.getPrice(value);
                                       if (firstCountController.text
                                           .trim()
                                           .isNotEmpty) {
@@ -206,95 +195,63 @@ Future<void> exhcangeDialog(BuildContext context, Size size) {
                             width: size.width / 3.toDouble(),
                             size: size,
                             onTap: () async {
+                              LoadingScreen().show(
+                                  context: context,
+                                  text: 'Please wait a moment....');
                               dateTime = DateTime.now();
 
                               // DECREASE FIRST Currency
                               switch (selectedMenuValueFirst) {
                                 case 'USD':
-                                  Provider.of<ModelProvider>(context,
-                                          listen: false)
-                                      .setUSDBalance(Provider.of<ModelProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .GetUSDBalance -
-                                          double.parse(firstCountController.text
-                                              .trim()));
+                                  provider.setUSDBalance(provider
+                                          .GetUSDBalance -
+                                      double.parse(
+                                          firstCountController.text.trim()));
                                   break;
                                 case 'BTC':
-                                  Provider.of<ModelProvider>(context,
-                                          listen: false)
-                                      .setBTCBalance(Provider.of<ModelProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .GetBTCBalance -
-                                          double.parse(firstCountController.text
-                                              .trim()));
+                                  provider.setBTCBalance(provider
+                                          .GetBTCBalance -
+                                      double.parse(
+                                          firstCountController.text.trim()));
                                   break;
                                 case 'ETH':
-                                  Provider.of<ModelProvider>(context,
-                                          listen: false)
-                                      .setETHBalance(Provider.of<ModelProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .GetETHBalance -
-                                          double.parse(firstCountController.text
-                                              .trim()));
+                                  provider.setETHBalance(provider
+                                          .GetETHBalance -
+                                      double.parse(
+                                          firstCountController.text.trim()));
                                   break;
                                 case 'USDT':
-                                  Provider.of<ModelProvider>(context,
-                                          listen: false)
-                                      .setUSDTBalance(
-                                          Provider.of<ModelProvider>(context,
-                                                      listen: false)
-                                                  .GetUSDTBalance -
-                                              double.parse(firstCountController
-                                                  .text
-                                                  .trim()));
+                                  provider.setUSDTBalance(provider
+                                          .GetUSDTBalance -
+                                      double.parse(
+                                          firstCountController.text.trim()));
                                   break;
                               }
 
                               //increase second currency
                               switch (selectedMenuValueSecond) {
                                 case 'USD':
-                                  Provider.of<ModelProvider>(context,
-                                          listen: false)
-                                      .setUSDBalance(Provider.of<ModelProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .GetUSDBalance +
+                                  provider.setUSDBalance(
+                                      provider.GetUSDBalance +
                                           double.parse(finalValue));
                                   break;
                                 case 'BTC':
-                                  Provider.of<ModelProvider>(context,
-                                          listen: false)
-                                      .setBTCBalance(Provider.of<ModelProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .GetBTCBalance +
+                                  provider.setBTCBalance(
+                                      provider.GetBTCBalance +
                                           double.parse(finalValue));
                                   break;
                                 case 'ETH':
-                                  Provider.of<ModelProvider>(context,
-                                          listen: false)
-                                      .setETHBalance(Provider.of<ModelProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .GetETHBalance +
+                                  provider.setETHBalance(
+                                      provider.GetETHBalance +
                                           double.parse(finalValue));
                                   break;
                                 case 'USDT':
-                                  Provider.of<ModelProvider>(context,
-                                          listen: false)
-                                      .setUSDTBalance(
-                                          Provider.of<ModelProvider>(context,
-                                                      listen: false)
-                                                  .GetUSDTBalance +
-                                              double.parse(finalValue));
+                                  provider.setUSDTBalance(
+                                      provider.GetUSDTBalance +
+                                          double.parse(finalValue));
                                   break;
                               }
-                              await Provider.of<ModelProvider>(context,
-                                      listen: false)
-                                  .UpdateFirestoreBalance();
+                              await provider.UpdateFirestoreBalance();
 
                               provider.addLocalTransacion(TransactionModel(
                                   type: 'exchange',
@@ -320,6 +277,7 @@ Future<void> exhcangeDialog(BuildContext context, Size size) {
                               });
 
                               Navigator.pop(context);
+                              LoadingScreen().hide();
                             },
                             color: KButtonBackgroundColor1,
                             text: 'Apply'),
@@ -340,44 +298,4 @@ Future<void> exhcangeDialog(BuildContext context, Size size) {
       ),
     ),
   );
-}
-
-class CurrencyTextWidget extends StatelessWidget {
-  const CurrencyTextWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 56, 56, 56),
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.greenAccent, width: 2)),
-      child: Column(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              ExchangeDropdownButton(),
-              Divider(
-                color: Colors.white,
-                thickness: 0.7,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-                child: Text(
-                  "Final Price",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'OpenSansR',
-                      fontSize: 20),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
 }

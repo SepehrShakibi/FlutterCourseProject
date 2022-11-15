@@ -1,6 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, non_constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto_wallet/helpers/loading/loading_screen.dart';
 import 'package:crypto_wallet/model/transaction.dart';
 import 'package:crypto_wallet/widgets/apply_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,30 +12,9 @@ import 'package:crypto_wallet/constants/incom_expense_dialog_constant.dart';
 import '../model/provider_model.dart';
 
 Future<void> IncomExpenseDialog(BuildContext context, Size size) {
+  final provider = Provider.of<ModelProvider>(context, listen: false);
   double newValue = 0.0;
   DateTime dateTime;
-
-  final List<Widget> _options = [
-    const Padding(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-      child: Text(
-        'Income',
-        style: TextStyle(
-            fontSize: 18.5, fontFamily: 'RobotoR', fontWeight: FontWeight.w400),
-      ),
-    ),
-    const Padding(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-      child: Text(
-        'Expense',
-        style: TextStyle(
-            fontSize: 18.5, fontFamily: 'RobotoR', fontWeight: FontWeight.w400),
-      ),
-    ),
-  ];
-  List<bool> _isSelected = <bool>[true, false];
-
-  bool _isIncome = true;
 
   ///
   ///
@@ -80,26 +60,23 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                           direction: Axis.horizontal,
                           onPressed: (int index) {
                             setInnerState(() {
-                              for (int i = 0; i < _isSelected.length; i++) {
-                                _isSelected[i] = index == i;
+                              for (int i = 0; i < isSelected.length; i++) {
+                                isSelected[i] = index == i;
                               }
-                              // Provider.of<ModelProvider>(context, listen: false)
-                              //     .setIsIncomeTransaction(_isSelected[0]);
-                              _isIncome = _isSelected[0];
+
+                              isIncome = isSelected[0];
                             });
                           },
                           borderRadius: BorderRadius.circular(20),
                           selectedBorderColor: Colors.white,
                           selectedColor: KPrimaryColor,
                           fillColor: Colors.grey.shade100,
-                          //    fillColor: Colors.white,
-                          // color: Colors.grey.shade100,
                           color: Colors.white,
                           borderColor: Colors.grey.shade100,
                           borderWidth: 1,
-                          isSelected: _isSelected,
+                          isSelected: isSelected,
                           //   disabledColor: Color.fromARGB(255, 221, 0, 0),
-                          children: _options),
+                          children: option),
                     ),
                     SizedBox(
                       height: size.height * 0.02,
@@ -120,9 +97,6 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                         ),
                       ),
                     ),
-                    // Divider(
-                    //   color: Colors.white,
-                    // ),
                     DropdownButtonFormField(
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
@@ -144,7 +118,6 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                             selectedMenuValue = value!;
                           });
                         }),
-
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 5, top: 8, bottom: 5),
@@ -194,19 +167,18 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                             width: size.width / 3.toDouble(),
                             size: size,
                             onTap: () async {
+                              LoadingScreen().show(
+                                  context: context,
+                                  text: 'Pleas wait a moment....');
                               dateTime = DateTime.now();
 
                               switch (selectedMenuValue) {
                                 case 'USD':
-                                  newValue = _isIncome
+                                  newValue = isIncome
                                       ? double.parse(
                                               _countController.text.trim()) +
-                                          Provider.of<ModelProvider>(context,
-                                                  listen: false)
-                                              .GetUSDBalance
-                                      : Provider.of<ModelProvider>(context,
-                                                  listen: false)
-                                              .GetUSDBalance -
+                                          provider.GetUSDBalance
+                                      : provider.GetUSDBalance -
                                           double.parse(
                                               _countController.text.trim());
                                   Provider.of<ModelProvider>(context,
@@ -214,15 +186,11 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                                       .setUSDBalance(newValue);
                                   break;
                                 case 'BTC':
-                                  newValue = _isIncome
+                                  newValue = isIncome
                                       ? double.parse(
                                               _countController.text.trim()) +
-                                          Provider.of<ModelProvider>(context,
-                                                  listen: false)
-                                              .GetBTCBalance
-                                      : Provider.of<ModelProvider>(context,
-                                                  listen: false)
-                                              .GetBTCBalance -
+                                          provider.GetBTCBalance
+                                      : provider.GetBTCBalance -
                                           double.parse(
                                               _countController.text.trim());
                                   Provider.of<ModelProvider>(context,
@@ -230,15 +198,11 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                                       .setBTCBalance(newValue);
                                   break;
                                 case 'ETH':
-                                  newValue = _isIncome
+                                  newValue = isIncome
                                       ? double.parse(
                                               _countController.text.trim()) +
-                                          Provider.of<ModelProvider>(context,
-                                                  listen: false)
-                                              .GetETHBalance
-                                      : Provider.of<ModelProvider>(context,
-                                                  listen: false)
-                                              .GetETHBalance -
+                                          provider.GetETHBalance
+                                      : provider.GetETHBalance -
                                           double.parse(
                                               _countController.text.trim());
 
@@ -247,15 +211,11 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                                       .setETHBalance(newValue);
                                   break;
                                 case 'USDT':
-                                  newValue = _isIncome
+                                  newValue = isIncome
                                       ? double.parse(
                                               _countController.text.trim()) +
-                                          Provider.of<ModelProvider>(context,
-                                                  listen: false)
-                                              .GetUSDTBalance
-                                      : Provider.of<ModelProvider>(context,
-                                                  listen: false)
-                                              .GetUSDTBalance -
+                                          provider.GetUSDTBalance
+                                      : provider.GetUSDTBalance -
                                           double.parse(
                                               _countController.text.trim());
 
@@ -265,16 +225,14 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                                   break;
                               }
 
-                              Provider.of<ModelProvider>(context, listen: false)
-                                  .UpdateFirestoreBalance();
-                              Provider.of<ModelProvider>(context, listen: false)
-                                  .addLocalTransacion(TransactionModel(
-                                      type: _isIncome ? 'income' : 'expense',
-                                      beginCurrency: selectedMenuValue,
-                                      endCurrency: 'nothing',
-                                      count: double.parse(
-                                          _countController.text.trim()),
-                                      dateTime: dateTime));
+                              provider.UpdateFirestoreBalance();
+                              provider.addLocalTransacion(TransactionModel(
+                                  type: isIncome ? 'income' : 'expense',
+                                  beginCurrency: selectedMenuValue,
+                                  endCurrency: 'nothing',
+                                  count: double.parse(
+                                      _countController.text.trim()),
+                                  dateTime: dateTime));
 
                               String uid =
                                   FirebaseAuth.instance.currentUser!.uid;
@@ -283,7 +241,7 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                                   .doc(uid)
                                   .collection('transactions')
                                   .add({
-                                'type': _isIncome ? 'income' : 'expense',
+                                'type': isIncome ? 'income' : 'expense',
                                 'beginCurrency': selectedMenuValue,
                                 'endCurrency': 'nothing',
                                 'count':
@@ -292,6 +250,7 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                               });
 
                               Navigator.pop(context);
+                              LoadingScreen().hide();
                             },
                             color: KButtonBackgroundColor1,
                             text: 'Apply'),

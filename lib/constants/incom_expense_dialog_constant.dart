@@ -40,3 +40,26 @@ final List<DropdownMenuItem<String>> dropdownMenuItem = [
     ),
   ),
 ];
+/////////////////////
+///
+final List<Widget> option = [
+  const Padding(
+    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+    child: Text(
+      'Income',
+      style: TextStyle(
+          fontSize: 18.5, fontFamily: 'RobotoR', fontWeight: FontWeight.w400),
+    ),
+  ),
+  const Padding(
+    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+    child: Text(
+      'Expense',
+      style: TextStyle(
+          fontSize: 18.5, fontFamily: 'RobotoR', fontWeight: FontWeight.w400),
+    ),
+  ),
+];
+List<bool> isSelected = <bool>[true, false];
+
+bool isIncome = true;
