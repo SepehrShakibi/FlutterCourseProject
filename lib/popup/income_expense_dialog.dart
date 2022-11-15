@@ -1,15 +1,13 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, non_constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:crypto_wallet/model/transaction.dart';
 import 'package:crypto_wallet/widgets/apply_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:crypto_wallet/constant.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
+import 'package:crypto_wallet/constants/incom_expense_dialog_constant.dart';
 import '../model/provider_model.dart';
 
 Future<void> IncomExpenseDialog(BuildContext context, Size size) {
@@ -37,99 +35,6 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
   List<bool> _isSelected = <bool>[true, false];
 
   bool _isIncome = true;
-
-  ////dropdown
-  ///
-  String _selectedMenuValue = 'USD';
-  final List<DropdownMenuItem<String>> _dropdownMenuItem = [
-    DropdownMenuItem(
-      value: "USD",
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        textBaseline: TextBaseline.alphabetic,
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          const Icon(
-            FontAwesomeIcons.dollarSign,
-            size: 33.5,
-            color: Colors.white,
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          const Text(
-            "USD",
-            style: TextStyle(
-                fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
-          )
-        ],
-      ),
-    ),
-    DropdownMenuItem(
-      value: 'BTC',
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: const [
-          Icon(
-            CryptoFontIcons.BTC,
-            size: 33.5,
-            color: Color(0xFFea973d),
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          Text(
-            "BTC",
-            style: TextStyle(
-                fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
-          )
-        ],
-      ),
-    ),
-    DropdownMenuItem(
-      value: 'ETH',
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            CryptoFontIcons.ETH,
-            size: 33.5,
-            color: Colors.blueAccent.shade400,
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          const Text(
-            "ETH",
-            style: TextStyle(
-                fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
-          )
-        ],
-      ),
-    ),
-    DropdownMenuItem(
-      value: 'USDT',
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            CryptoFontIcons.USDT,
-            size: 33.5,
-            color: Colors.greenAccent.shade400,
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          const Text(
-            "USDT",
-            style: TextStyle(
-                fontSize: 22, color: Colors.white, fontFamily: 'OpenSansR'),
-          )
-        ],
-      ),
-    ),
-  ];
 
   ///
   ///
@@ -232,11 +137,11 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                             fillColor: const Color.fromARGB(255, 56, 56, 56)),
                         dropdownColor: const Color.fromARGB(255, 58, 58, 58),
                         borderRadius: BorderRadius.circular(15),
-                        value: _selectedMenuValue,
-                        items: _dropdownMenuItem,
+                        value: selectedMenuValue,
+                        items: dropdownMenuItem,
                         onChanged: (String? value) {
                           setInnerState(() {
-                            _selectedMenuValue = value!;
+                            selectedMenuValue = value!;
                           });
                         }),
 
@@ -291,7 +196,7 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                             onTap: () async {
                               dateTime = DateTime.now();
 
-                              switch (_selectedMenuValue) {
+                              switch (selectedMenuValue) {
                                 case 'USD':
                                   newValue = _isIncome
                                       ? double.parse(
@@ -365,7 +270,7 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                               Provider.of<ModelProvider>(context, listen: false)
                                   .addLocalTransacion(TransactionModel(
                                       type: _isIncome ? 'income' : 'expense',
-                                      beginCurrency: _selectedMenuValue,
+                                      beginCurrency: selectedMenuValue,
                                       endCurrency: 'nothing',
                                       count: double.parse(
                                           _countController.text.trim()),
@@ -379,7 +284,7 @@ Future<void> IncomExpenseDialog(BuildContext context, Size size) {
                                   .collection('transactions')
                                   .add({
                                 'type': _isIncome ? 'income' : 'expense',
-                                'beginCurrency': _selectedMenuValue,
+                                'beginCurrency': selectedMenuValue,
                                 'endCurrency': 'nothing',
                                 'count':
                                     double.parse(_countController.text.trim()),

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:crypto_wallet/constants/exchange_dialog_constant.dart';
 import 'package:crypto_wallet/model/provider_model.dart';
 import 'package:crypto_wallet/model/transaction.dart';
