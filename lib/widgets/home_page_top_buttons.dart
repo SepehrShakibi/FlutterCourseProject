@@ -26,7 +26,7 @@ class HomePageTopButtons extends StatelessWidget {
               flex: 100,
               child: HomePageButton(
                 onPressed: () async {
-                  return await ExhcangeDialog(context, size);
+                  return await exhcangeDialog(context, size);
                 },
                 icon: Icons.sync_alt_sharp,
                 title: "Exchange",
