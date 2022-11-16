@@ -12,6 +12,13 @@ import 'package:flutter/cupertino.dart';
 import '../widgets/icons/eth_recent_transaction_icon.dart';
 
 class ModelProvider extends ChangeNotifier {
+  //dialog
+
+  String _exchangeDialogSelectedMenuValueFirst = 'USD';
+  String _exchangeDialogSelectedMenuValueSecond = 'BTC';
+  String _inExSelectedMenuValue = 'BTC';
+  List<bool> _inExToggleButtonSelected = <bool>[true, false];
+  bool _dialogIsCome = true;
   //register signIn variable
   bool _showLoginPage = true;
 
@@ -39,6 +46,29 @@ class ModelProvider extends ChangeNotifier {
   List BTCChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
   List ETHChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
   List USDTChart = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+
+//dialog
+  String get ExchangeDialogFirstValue => _exchangeDialogSelectedMenuValueFirst;
+  String get ExchangeDialogSecondValue =>
+      _exchangeDialogSelectedMenuValueSecond;
+  String get InExDialogSelectedValue => _inExSelectedMenuValue;
+
+  List<bool> get inExSelectedDialog => _inExToggleButtonSelected;
+  bool get dialogIsIncome => _dialogIsCome;
+  void setToggleInExDialog(int index) {
+    for (int i = 0; i < _inExToggleButtonSelected.length; i++) {
+      _inExToggleButtonSelected[i] = index == i;
+    }
+
+    _dialogIsCome = _inExToggleButtonSelected[0];
+    notifyListeners();
+  }
+
+  void ResetSelectedInExDialog() {
+    _inExToggleButtonSelected = <bool>[true, false];
+    notifyListeners();
+  }
+
   // login page show getter
   bool get ShowLoginPage => _showLoginPage;
   void get ToggleShowLoginPage {
@@ -82,6 +112,11 @@ class ModelProvider extends ChangeNotifier {
   bool get getIsIncomeTransaction => isIncome;
 
   List get getTransactionList => List.from(transactionList.reversed);
+//dialog setter
+  void setInExDialog(String newValue) {
+    _inExSelectedMenuValue = newValue;
+    notifyListeners();
+  }
 
   //balance setter
   void setUSDBalance(double usdbalance) {

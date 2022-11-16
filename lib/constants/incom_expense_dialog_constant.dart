@@ -60,6 +60,5 @@ final List<Widget> option = [
     ),
   ),
 ];
-List<bool> isSelected = <bool>[true, false];
 
 bool isIncome = true;

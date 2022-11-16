@@ -72,7 +72,7 @@ Future<void> exhcangeDialog(BuildContext context, Size size) {
                                   dropdownColor:
                                       const Color.fromARGB(255, 58, 58, 58),
                                   borderRadius: BorderRadius.circular(15),
-                                  value: selectedMenuValueFirst,
+                                  value: provider.ExchangeDialogFirstValue,
                                   items: dropdownMenuItem,
                                   onChanged: (String? value) {
                                     setState(() {

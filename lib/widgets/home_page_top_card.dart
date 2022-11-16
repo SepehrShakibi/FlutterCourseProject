@@ -15,6 +15,7 @@ class HomePageTopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ModelProvider>(context);
     return Card(
       color: Colors.transparent,
       elevation: 15,
@@ -35,7 +36,7 @@ class HomePageTopCard extends StatelessWidget {
                 color: Color(0xFFF4F9FC)),
           ),
           Text(
-            "${Provider.of<ModelProvider>(context).usdBalance}  \$",
+            "${provider.usdBalance.toStringAsFixed(3)}  \$",
             style: const TextStyle(
                 fontFamily: 'CharisSILB',
                 fontWeight: FontWeight.bold,
@@ -55,21 +56,17 @@ class HomePageTopCard extends StatelessWidget {
               children: [
                 TopCardSubCurrency(
                   icon: CryptoFontIcons.BTC,
-                  price: Provider.of<ModelProvider>(context)
-                      .GetBTCBalance
-                      .toString(),
+                  price: provider.GetBTCBalance.toString(),
                 ),
                 TopCardSubCurrency(
                   icon: CryptoFontIcons.ETH,
                   price: Provider.of<ModelProvider>(context)
                       .GetETHBalance
-                      .toString(),
+                      .toStringAsFixed(3),
                 ),
                 TopCardSubCurrency(
                   icon: CryptoFontIcons.USDT,
-                  price: Provider.of<ModelProvider>(context)
-                      .GetUSDTBalance
-                      .toString(),
+                  price: provider.GetUSDTBalance.toStringAsFixed(3),
                 ),
               ],
             ),
